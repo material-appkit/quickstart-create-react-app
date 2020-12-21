@@ -5,7 +5,7 @@
   "keywords": [],
   "description": "Material-AppKit PWA Starter",
   "private": true,
-  "homepage": "/",
+  "homepage": "/quickstart-create-react-app",
   "dependencies": {
     "@material-appkit/core": "^2.9.2",
     "@material-ui/core": "^4.11.2",
