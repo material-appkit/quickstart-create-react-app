@@ -1,0 +1,26 @@
+{
+  "files": {
+    "static/js/0.fb5ad0e2.chunk.js": "/static/js/0.fb5ad0e2.chunk.js",
+    "main.js": "/static/js/main.31dca5d6.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.0dcf13f5.js",
+    "static/js/3.b841c313.chunk.js": "/static/js/3.b841c313.chunk.js",
+    "static/js/4.b4e7bacc.chunk.js": "/static/js/4.b4e7bacc.chunk.js",
+    "static/js/5.4673983a.chunk.js": "/static/js/5.4673983a.chunk.js",
+    "static/js/6.e3cefd46.chunk.js": "/static/js/6.e3cefd46.chunk.js",
+    "static/js/7.931604b7.chunk.js": "/static/js/7.931604b7.chunk.js",
+    "static/js/8.52204af8.chunk.js": "/static/js/8.52204af8.chunk.js",
+    "static/js/9.2ecc24ec.chunk.js": "/static/js/9.2ecc24ec.chunk.js",
+    "index.html": "/index.html",
+    "service-worker.js": "/service-worker.js",
+    "static/js/0.fb5ad0e2.chunk.js.LICENSE.txt": "/static/js/0.fb5ad0e2.chunk.js.LICENSE.txt",
+    "static/js/3.b841c313.chunk.js.LICENSE.txt": "/static/js/3.b841c313.chunk.js.LICENSE.txt",
+    "static/js/4.b4e7bacc.chunk.js.LICENSE.txt": "/static/js/4.b4e7bacc.chunk.js.LICENSE.txt",
+    "static/media/application-logo.svg": "/static/media/application-logo.024bc40a.svg",
+    "static/media/cra-logo.7fdad8e3.svg": "/static/media/cra-logo.7fdad8e3.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0dcf13f5.js",
+    "static/js/3.b841c313.chunk.js",
+    "static/js/main.31dca5d6.chunk.js"
+  ]
+}
