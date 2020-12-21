@@ -1,26 +1,26 @@
 {
   "files": {
-    "static/js/0.fb5ad0e2.chunk.js": "/static/js/0.fb5ad0e2.chunk.js",
-    "main.js": "/static/js/main.31dca5d6.chunk.js",
-    "runtime-main.js": "/static/js/runtime-main.0dcf13f5.js",
-    "static/js/3.b841c313.chunk.js": "/static/js/3.b841c313.chunk.js",
-    "static/js/4.b4e7bacc.chunk.js": "/static/js/4.b4e7bacc.chunk.js",
-    "static/js/5.4673983a.chunk.js": "/static/js/5.4673983a.chunk.js",
-    "static/js/6.e3cefd46.chunk.js": "/static/js/6.e3cefd46.chunk.js",
-    "static/js/7.931604b7.chunk.js": "/static/js/7.931604b7.chunk.js",
-    "static/js/8.52204af8.chunk.js": "/static/js/8.52204af8.chunk.js",
-    "static/js/9.2ecc24ec.chunk.js": "/static/js/9.2ecc24ec.chunk.js",
-    "index.html": "/index.html",
-    "service-worker.js": "/service-worker.js",
-    "static/js/0.fb5ad0e2.chunk.js.LICENSE.txt": "/static/js/0.fb5ad0e2.chunk.js.LICENSE.txt",
-    "static/js/3.b841c313.chunk.js.LICENSE.txt": "/static/js/3.b841c313.chunk.js.LICENSE.txt",
-    "static/js/4.b4e7bacc.chunk.js.LICENSE.txt": "/static/js/4.b4e7bacc.chunk.js.LICENSE.txt",
-    "static/media/application-logo.svg": "/static/media/application-logo.024bc40a.svg",
-    "static/media/cra-logo.7fdad8e3.svg": "/static/media/cra-logo.7fdad8e3.svg"
+    "static/js/0.fb5ad0e2.chunk.js": "/quickstart-create-react-app/static/js/0.fb5ad0e2.chunk.js",
+    "main.js": "/quickstart-create-react-app/static/js/main.92394a70.chunk.js",
+    "runtime-main.js": "/quickstart-create-react-app/static/js/runtime-main.2f22cec8.js",
+    "static/js/3.4e87d024.chunk.js": "/quickstart-create-react-app/static/js/3.4e87d024.chunk.js",
+    "static/js/4.b4e7bacc.chunk.js": "/quickstart-create-react-app/static/js/4.b4e7bacc.chunk.js",
+    "static/js/5.4673983a.chunk.js": "/quickstart-create-react-app/static/js/5.4673983a.chunk.js",
+    "static/js/6.e3cefd46.chunk.js": "/quickstart-create-react-app/static/js/6.e3cefd46.chunk.js",
+    "static/js/7.931604b7.chunk.js": "/quickstart-create-react-app/static/js/7.931604b7.chunk.js",
+    "static/js/8.52204af8.chunk.js": "/quickstart-create-react-app/static/js/8.52204af8.chunk.js",
+    "static/js/9.2ecc24ec.chunk.js": "/quickstart-create-react-app/static/js/9.2ecc24ec.chunk.js",
+    "index.html": "/quickstart-create-react-app/index.html",
+    "service-worker.js": "/quickstart-create-react-app/service-worker.js",
+    "static/js/0.fb5ad0e2.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/0.fb5ad0e2.chunk.js.LICENSE.txt",
+    "static/js/3.4e87d024.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/3.4e87d024.chunk.js.LICENSE.txt",
+    "static/js/4.b4e7bacc.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/4.b4e7bacc.chunk.js.LICENSE.txt",
+    "static/media/application-logo.svg": "/quickstart-create-react-app/static/media/application-logo.024bc40a.svg",
+    "static/media/cra-logo.7fdad8e3.svg": "/quickstart-create-react-app/static/media/cra-logo.7fdad8e3.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0dcf13f5.js",
-    "static/js/3.b841c313.chunk.js",
-    "static/js/main.31dca5d6.chunk.js"
+    "static/js/runtime-main.2f22cec8.js",
+    "static/js/3.4e87d024.chunk.js",
+    "static/js/main.92394a70.chunk.js"
   ]
 }
