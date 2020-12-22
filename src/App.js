@@ -46,7 +46,6 @@ class App extends React.PureComponent {
       layoutConfig: null,
 
       appContext: {
-        baseCurrency: 'USD',
         forexData: null,
         loadProgress: null,
         locale: activeLocale(),

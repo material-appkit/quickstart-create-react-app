@@ -2,19 +2,14 @@ import React from 'react';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
 
 import ListViewItem, {
   listItemProps,
   commonPropTypes,
 } from '@material-appkit/core/components/ListViewItem';
 
-const styles = makeStyles((theme) => ({
-
-}));
 
 function ForexListItem(props) {
-  const classes = styles();
   const { currency, value } = props.item;
 
   const allListItemProps = listItemProps(props);
@@ -22,9 +17,15 @@ function ForexListItem(props) {
   return (
     <ListViewItem {...allListItemProps}>
       <ListItemIcon>
-        <img className={`flag flag-${currency}`} />
+        <img
+          alt=''
+          className={`flag flag-${currency.toLowerCase()}`}
+        />
       </ListItemIcon>
-      <ListItemText primary={value} />
+      <ListItemText
+        primary={currency}
+        secondary={value}
+      />
     </ListViewItem>
   );
 }

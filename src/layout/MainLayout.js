@@ -1,6 +1,6 @@
 import React, { lazy, useContext } from 'react';
 
-
+import StorageManager from '@material-appkit/core/managers/StorageManager';
 import NavigationControllerLayout from './NavigationControllerLayout';
 
 import AppContext from 'AppContext';
@@ -14,11 +14,16 @@ const routes = [
 
 function MainLayout(props) {
   const context = useContext(AppContext);
-  const { baseCurrency } = context;
 
   const initialize = () => {
     return new Promise((resolve, reject) => {
       context.update({ loadProgress: undefined });
+
+      let baseCurrency = StorageManager.localValue('baseCurrency');
+      if (!baseCurrency) {
+        baseCurrency = 'USD';
+        StorageManager.setLocalValue('baseCurrency', baseCurrency);
+      }
 
       fetch(`${FOREX_API_ENDPOINT}/latest?base=${baseCurrency}`)
         .then((res) => {
