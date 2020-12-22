@@ -2,12 +2,12 @@
   "files": {
     "static/js/0.8916077f.chunk.js": "/quickstart-create-react-app/static/js/0.8916077f.chunk.js",
     "static/js/1.29bd765f.chunk.js": "/quickstart-create-react-app/static/js/1.29bd765f.chunk.js",
-    "main.js": "/quickstart-create-react-app/static/js/main.77bf9b90.chunk.js",
-    "runtime-main.js": "/quickstart-create-react-app/static/js/runtime-main.96561f03.js",
+    "main.js": "/quickstart-create-react-app/static/js/main.9091aff0.chunk.js",
+    "runtime-main.js": "/quickstart-create-react-app/static/js/runtime-main.cecf4ae0.js",
     "static/js/4.e0d65497.chunk.js": "/quickstart-create-react-app/static/js/4.e0d65497.chunk.js",
     "static/js/5.a95d73ca.chunk.js": "/quickstart-create-react-app/static/js/5.a95d73ca.chunk.js",
     "static/css/6.cec94579.chunk.css": "/quickstart-create-react-app/static/css/6.cec94579.chunk.css",
-    "static/js/6.fd77dee0.chunk.js": "/quickstart-create-react-app/static/js/6.fd77dee0.chunk.js",
+    "static/js/6.c1659171.chunk.js": "/quickstart-create-react-app/static/js/6.c1659171.chunk.js",
     "static/js/7.82b2ee7f.chunk.js": "/quickstart-create-react-app/static/js/7.82b2ee7f.chunk.js",
     "static/js/8.877cd2c5.chunk.js": "/quickstart-create-react-app/static/js/8.877cd2c5.chunk.js",
     "static/css/9.cec94579.chunk.css": "/quickstart-create-react-app/static/css/9.cec94579.chunk.css",
@@ -26,8 +26,8 @@
     "static/media/flag_sprites.css": "/quickstart-create-react-app/static/media/flag_sprites.9302f505.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.96561f03.js",
+    "static/js/runtime-main.cecf4ae0.js",
     "static/js/4.e0d65497.chunk.js",
-    "static/js/main.77bf9b90.chunk.js"
+    "static/js/main.9091aff0.chunk.js"
   ]
 }
