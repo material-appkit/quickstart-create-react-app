@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 
 import React, { useContext, useEffect, useState } from 'react';
 
-import { reverse } from '@material-appkit/core/util/urls';
-
 import ListView from '@material-appkit/core/components/ListView';
 import NavManager from '@material-appkit/core/managers/NavManager';
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
@@ -12,7 +10,6 @@ import StorageManager from '@material-appkit/core/managers/StorageManager';
 import ForexListItem from './ForexListItem';
 
 import AppContext from 'AppContext';
-// import paths from 'paths';
 
 import 'media/flag_sprites.css';
 
@@ -27,7 +24,6 @@ function ForexListView(props) {
 
   const [forexData, setForexData] = useState(null);
   const [dataSource, setDataSource] = useState(null);
-
 
   useEffect(() => {
     const qsParams = NavManager.qsParams;
@@ -51,8 +47,9 @@ function ForexListView(props) {
           if (res.status === 200) {
             res.json().then((data) => {
               setForexData(data);
+              const sortedCurrencies = Object.keys(data.rates).sort();
 
-              setDataSource(Object.keys(data.rates).map((currency) => ({
+              setDataSource(sortedCurrencies.map((currency) => ({
                 base,
                 currency,
                 value: data.rates[currency],

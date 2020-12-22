@@ -9,7 +9,9 @@ import paths from 'paths';
 
 const routes = [
   { path: paths.dashboard, component: lazy(() => import('pages/DashboardPage')) },
+
   { path: paths.forex.index, component: lazy(() => import('pages/ForexIndexPage')) },
+  { path: paths.forex.currency, component: lazy(() => import('pages/ForexDetailPage')) },
 ];
 
 function MainLayout(props) {
@@ -23,7 +25,7 @@ function MainLayout(props) {
         SnackbarManager.success('Initialization Complete');
         context.update({ loadProgress: null });
         resolve();
-      }, 2000);
+      }, 1000);
     });
   };
 
