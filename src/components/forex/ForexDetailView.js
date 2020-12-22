@@ -8,7 +8,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
@@ -26,7 +25,7 @@ const styles = makeStyles((theme) => ({
 
 function ForexDetailView(props) {
   const classes = styles();
-  
+
   const { base, currency } = props;
 
   const context = useContext(AppContext);

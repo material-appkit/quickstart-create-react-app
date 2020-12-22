@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 import React, { useContext, useEffect, useState } from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
+
 import ListView from '@material-appkit/core/components/ListView';
 import NavManager from '@material-appkit/core/managers/NavManager';
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
@@ -15,7 +17,14 @@ import 'media/flag_sprites.css';
 
 import { FOREX_API_ENDPOINT } from 'variables';
 
+const styles = makeStyles((theme) => ({
+  listView: {
+    width: 300,
+  },
+}));
+
 function ForexListView(props) {
+  const classes = styles();
 
   const context = useContext(AppContext);
   const updateAppContext = context.update;
@@ -84,6 +93,7 @@ function ForexListView(props) {
           onNavigate(item);
         },
       }}
+      listViewClassName={classes.listView}
     />
   );
 }
