@@ -121,7 +121,7 @@ class App extends React.PureComponent {
     return (
       <AppContext.Provider value={appContext}>
         <Router
-          basename={process.env.REACT_APP_URL_BASENAME}
+          basename={process.env.PUBLIC_URL}
           history={NavManager.history}
         >
           <HelmetProvider>
