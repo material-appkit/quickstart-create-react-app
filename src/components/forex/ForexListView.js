@@ -1,42 +1,62 @@
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
 
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
+// import Typography from '@material-ui/core/Typography';
+import { reverse } from '@material-appkit/core/util/urls';
+
+import ListView from '@material-appkit/core/components/ListView';
+
+
+import ForexListItem from './ForexListItem';
 
 import AppContext from 'AppContext';
+import paths from 'paths';
 
 import 'media/flag_sprites.css';
 
-const styles = makeStyles((theme) => ({
-  view: {
-    padding: theme.spacing(1),
-  },
-}));
 
-function View(props) {
-  const classes = styles();
+function ForexListView(props) {
   const context = useContext(AppContext);
-  const { forexData } = context;
+  const { baseCurrency, forexData } = context;
 
   const [dataSource, setDataSource] = useState(null);
 
   useEffect(() => {
-    console.log(forexData);
+    const { rates } = forexData;
+
+    setDataSource(Object.keys(rates).map((currency) => ({
+      currency: currency.toLowerCase(),
+      value: rates[currency],
+    })));
   }, [forexData]);
+
+
+  const itemContextProvider = (item) => ({
+    component: RouterLink,
+    to: reverse(paths.forex.currency, { currency: item.currency }),
+  });
+
 
   if (!dataSource) {
     return null;
   }
 
+  console.log(baseCurrency);
+
   return (
-    <Box component="main" className={classes.view}>
-      <Typography>View Content</Typography>
-    </Box>
+    <ListView
+      displayMode="list"
+      itemContextProvider={itemContextProvider}
+      itemIdKey="currency"
+      itemLinkKey="path"
+      items={dataSource}
+      listItemComponent={ForexListItem}
+      loadingVariant="linear"
+    />
   );
 }
 
-View.propTypes = {};
 
-export default View;
+export default ForexListView;

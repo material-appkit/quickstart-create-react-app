@@ -14,6 +14,7 @@ const paths = {
 
   forex: include('/forex', {
     index: '',
+    currency: '/:currency',
   }),
 };
 

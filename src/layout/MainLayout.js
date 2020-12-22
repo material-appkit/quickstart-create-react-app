@@ -14,7 +14,7 @@ const routes = [
 
 function MainLayout(props) {
   const context = useContext(AppContext);
-  const baseCurrency = 'USD';
+  const { baseCurrency } = context;
 
   const initialize = () => {
     return new Promise((resolve, reject) => {
