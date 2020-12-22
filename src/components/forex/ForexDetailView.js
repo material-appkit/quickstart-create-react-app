@@ -24,33 +24,19 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-function ForexDetailView({ location, representedObject }) {
+function ForexDetailView(props) {
   const classes = styles();
+  
+  const { base, currency } = props;
 
   const context = useContext(AppContext);
   const updateAppContext = context.update;
 
-  const [baseCurrency, setBaseCurrency] = useState(null);
-  const [currency, setCurrency] = useState(null);
-
   const [tableDataSource, setTableDataSource] = useState(null);
 
-  useEffect(() => {
-    if (representedObject) {
-      setCurrency(representedObject.currency);
-    }
-  }, [representedObject]);
-
 
   useEffect(() => {
-    const qsParams = qs.parse(location.search);
-    setBaseCurrency(qsParams.base);
-  }, [location]);
-
-
-
-  useEffect(() => {
-    if (!(baseCurrency && currency)) {
+    if (!(base && currency)) {
       return;
     }
 
@@ -59,7 +45,7 @@ function ForexDetailView({ location, representedObject }) {
     const queryParams = qs.stringify({
       start_at: '2020-01-01',
       end_at: '2020-12-31',
-      base: baseCurrency,
+      base,
       symbols: currency,
     });
 
@@ -84,10 +70,10 @@ function ForexDetailView({ location, representedObject }) {
       .finally(() => {
         updateAppContext({ loadProgress: null });
       });
-  }, [baseCurrency, currency, updateAppContext]);
+  }, [base, currency, updateAppContext]);
 
 
-  if (!(baseCurrency && currency && tableDataSource)) {
+  if (!(base && currency && tableDataSource)) {
     return null;
   }
 
@@ -98,7 +84,7 @@ function ForexDetailView({ location, representedObject }) {
           <TableCell>
             <img
               alt=''
-              className={`flag flag-${baseCurrency.toLowerCase()}`}
+              className={`flag flag-${base.toLowerCase()}`}
             />
 
             <img
@@ -126,8 +112,8 @@ function ForexDetailView({ location, representedObject }) {
 }
 
 ForexDetailView.propTypes = {
-  location: PropTypes.object.isRequired,
-  representedObject: PropTypes.object.isRequired,
+  base: PropTypes.string,
+  currency: PropTypes.string,
 };
 
 export default ForexDetailView;

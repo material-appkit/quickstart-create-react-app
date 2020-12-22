@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MasterDetailView from '@material-appkit/core/components/MasterDetailView';
+import NavManager from '@material-appkit/core/managers/NavManager';
 import ViewController from '@material-appkit/core/components/ViewController';
 
 import ForexListView from 'components/forex/ForexListView';
@@ -11,6 +12,7 @@ import { COMMON_PAGE_PROPS } from 'variables';
 
 function ForexIndexPage(props) {
   const location = props.location;
+  const qsParams = NavManager.qsParams;
 
   const loadForexData = (currency) => {
     return new Promise((resolve, reject) => {
@@ -25,6 +27,10 @@ function ForexIndexPage(props) {
         detailViewPlaceholder={(
           <p>Forex Detail View Placeholder</p>
         )}
+        detailViewProps={{
+          base: qsParams.base,
+          currency: qsParams.currency,
+        }}
         inspectedObjectLoader={loadForexData}
         itemIdKey="currency"
         ListViewComponent={ForexListView}

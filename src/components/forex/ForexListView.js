@@ -1,4 +1,3 @@
-import qs from 'query-string';
 import PropTypes from 'prop-types';
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -31,7 +30,7 @@ function ForexListView(props) {
 
 
   useEffect(() => {
-    const qsParams = qs.parse(location.search);
+    const qsParams = NavManager.qsParams;
     const { base } = qsParams;
 
     if (!base) {
