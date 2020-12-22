@@ -6,7 +6,8 @@ const paths = {
   auth: include('/auth', {
     index: '',
     login: '/sign-in',
-    forgotPassword: '/forgot-password',
+    forgotPassword: 'forgot-password',
+    passwordResetMailSent: 'forgot-password/mail-sent',
   }),
 };
 

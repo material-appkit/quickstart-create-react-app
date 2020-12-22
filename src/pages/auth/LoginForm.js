@@ -15,7 +15,7 @@ import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
-// import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
+import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
 
 import paths from 'paths';
 
@@ -42,7 +42,9 @@ const styles = makeStyles((theme) => ({
 
 function LoginForm(props) {
   const classes = styles();
-  const { loading } = props;
+
+  const { loading, setLoading } = props;
+
   const [redirectTo] = useState(null);
 
 
@@ -75,16 +77,17 @@ function LoginForm(props) {
   };
 
   const authenticate = async(loginForm) => {
+    setLoading(true);
+
     const credentials = {
       email: loginForm.email.value,
       password: loginForm.password.value,
     };
 
-    props.setLoading(true);
-
-    console.log('TODO: send auth request', credentials);
+    SnackbarManager.info('TODO: Send authorization request...');
+    console.log(credentials);
     setTimeout(() => {
-      props.setLoading(false);
+      setLoading(false);
     }, 1000);
   };
 

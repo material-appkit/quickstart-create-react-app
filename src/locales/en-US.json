@@ -3,6 +3,10 @@
 
   "AUTHENTICATING": "Authenticating",
   "EMAIL": "Email",
+  "EMAIL_ADDRESS": "E-mail Address",
+  "FORGOT_PASSWORD": "Forgot Password",
   "PASSWORD": "Password",
+  "REQUEST_PASSWORD_RESET": "Request Password Reset",
+  "REQUESTING_PASSWORD_RESET": "Requesting Password Reset...",
   "SIGN_IN": "Sign in"
 }

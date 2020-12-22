@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import ViewController from '@material-appkit/core/components/ViewController';
 
+import ForgotPasswordForm from './ForgotPasswordForm';
 import LoginForm from './LoginForm';
 import paths  from 'paths';
 import { NAVIGATION_CONTROLLER_PAGE_PROPS } from 'variables';
@@ -34,13 +35,14 @@ function AuthorizationPage(props) {
 
   const routes = [
     { path: paths.auth.login, Component: LoginForm },
+    { path: paths.auth.forgotPassword, Component: ForgotPasswordForm },
   ];
-  
+
   return (
     <ViewController
       contextMenuItems={contextMenuItems}
       rightBarItem={rightToolbarItem}
-      title="Log In"
+      title="Sign In"
       {...props}
     >
       <main>
