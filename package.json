@@ -5,6 +5,7 @@
   "keywords": [],
   "description": "Material-AppKit PWA Starter",
   "private": true,
+  "homepage": "/quickstart-create-react-app",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -30,6 +31,7 @@
     "start-secure": "HTTPS=true react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build",
+    "build-production": "dotenv -e .env.production react-scripts build",
     "build-dev": "dotenv -e .env.development react-scripts build",
     "build-local": "dotenv -e .env.development.local react-scripts build",
     "test": "react-scripts test --env=jsdom",
