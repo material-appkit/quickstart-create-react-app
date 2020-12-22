@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -43,7 +43,7 @@ function ApplicationMenuControl(props) {
   const { navLinkArrangement } = props;
 
   return (
-    <Fragment>
+    <>
       <IconButton
         edge="start"
         className={classes.drawerMenuButton}
@@ -64,7 +64,7 @@ function ApplicationMenuControl(props) {
         }}
         ModalProps={{ keepMounted: true }}
         open={mobileOpen}
-        onClose={() => { setMobileOpen(false); }}
+        onClose={() => setMobileOpen(!mobileOpen)}
         variant="temporary"
       >
         <List disablePadding>
@@ -74,6 +74,9 @@ function ApplicationMenuControl(props) {
             if (linkInfo.path) {
               listItemProps.to = linkInfo.path;
               listItemProps.component = RouterLink;
+            } else if (linkInfo.href) {
+              listItemProps.component = 'a';
+              listItemProps.href = linkInfo.href;
             }
 
             const handleListItemClick = () => {
@@ -96,15 +99,13 @@ function ApplicationMenuControl(props) {
                   <linkInfo.Icon />
                 </ListItemIcon>
 
-                <ListItemText
-                  primary={linkInfo.title}
-                />
+                <ListItemText primary={linkInfo.title} />
               </ListItem>
             );
           })}
         </List>
       </Drawer>
-    </Fragment>
+    </>
   );
 }
 

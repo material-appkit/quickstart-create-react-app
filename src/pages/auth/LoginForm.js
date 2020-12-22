@@ -84,8 +84,7 @@ function LoginForm(props) {
       password: loginForm.password.value,
     };
 
-    SnackbarManager.info('TODO: Send authorization request...');
-    console.log(credentials);
+    SnackbarManager.info('TODO: Send authorization request...', credentials);
     setTimeout(() => {
       setLoading(false);
     }, 1000);

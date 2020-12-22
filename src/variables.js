@@ -7,6 +7,8 @@ export const COMMON_PAGE_PROPS = {
   match: PropTypes.object,
 };
 
+export const FOREX_API_ENDPOINT = 'https://api.exchangeratesapi.io';
+
 export const NAVIGATION_CONTROLLER_PAGE_PROPS = {
   ...COMMON_PAGE_PROPS,
   history: PropTypes.object,

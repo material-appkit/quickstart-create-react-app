@@ -48,7 +48,6 @@ function ForgotPasswordForm(props) {
     setLoading(true);
 
     SnackbarManager.info(`TODO: Send password request request to "${email}"`);
-    console.log(email);
     setTimeout(() => {
       setLoading(false);
     }, 1000);

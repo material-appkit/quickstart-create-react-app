@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import React, { useContext } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,8 +9,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import HomeIcon from '@material-ui/icons/Home';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 import Spacer from '@material-appkit/core/components/Spacer';
@@ -56,14 +57,19 @@ const styles = makeStyles((theme) => ({
 
 const navLinkArrangement = [
   {
-    title: 'Home',
-    path: paths.index,
-    Icon: HomeIcon,
+    Icon: DashboardIcon,
+    path: paths.dashboard,
+    title: 'Dashboard',
   },
   {
-    title: 'Sign In',
-    path: paths.auth.login,
     Icon: VpnKeyIcon,
+    path: paths.forex.index,
+    title: 'Foreign Exchange',
+  },
+  {
+    Icon: GitHubIcon,
+    href: 'https://github.com/material-appkit/quickstart-create-react-app',
+    title: 'GitHub Repository',
   },
 ];
 
@@ -92,11 +98,11 @@ function ApplicationBar(props) {
         <Spacer />
 
         <IconButton
-          alt="GitHub Repository"
           className={classes.navButton}
-          href="https://github.com/material-appkit/quickstart-create-react-app"
+          component={RouterLink}
+          to={paths.auth.login}
         >
-          <GitHubIcon />
+          <VpnKeyIcon />
         </IconButton>
       </Toolbar>
 

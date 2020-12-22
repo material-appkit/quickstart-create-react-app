@@ -1,13 +1,19 @@
 import { include } from '@material-appkit/core/util/path';
 
 const paths = {
-  index: '/',
+  index: '',
+
+  dashboard: '/dashboard',
 
   auth: include('/auth', {
     index: '',
     login: '/sign-in',
     forgotPassword: 'forgot-password',
     passwordResetMailSent: 'forgot-password/mail-sent',
+  }),
+
+  forex: include('/forex', {
+    index: '',
   }),
 };
 

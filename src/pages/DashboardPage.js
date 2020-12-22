@@ -56,11 +56,11 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-function IndexPage(props) {
+function DashboardPage(props) {
   const classes = styles();
 
   return (
-    <ViewController title="Home" {...props}>
+    <ViewController title="Dashboard" {...props}>
       <Container maxWidth="md" component="main" className={classes.main}>
         <header className={classes.header}>
           <Grid container>
@@ -101,6 +101,6 @@ function IndexPage(props) {
   );
 }
 
-IndexPage.propTypes = COMMON_PAGE_PROPS;
+DashboardPage.propTypes = COMMON_PAGE_PROPS;
 
-export default IndexPage;
+export default DashboardPage;
