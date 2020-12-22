@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import PropTypes from 'prop-types';
 
 import React, { useContext, useEffect, useState } from 'react';
@@ -5,6 +6,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { reverse } from '@material-appkit/core/util/urls';
 
 import ListView from '@material-appkit/core/components/ListView';
+import NavManager from '@material-appkit/core/managers/NavManager';
+import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
 import StorageManager from '@material-appkit/core/managers/StorageManager';
 
 import ForexListItem from './ForexListItem';
@@ -14,25 +17,59 @@ import AppContext from 'AppContext';
 
 import 'media/flag_sprites.css';
 
+import { FOREX_API_ENDPOINT } from 'variables';
 
 function ForexListView(props) {
-  const { onNavigate } = props;
 
   const context = useContext(AppContext);
-  const { forexData } = context;
-  
+  const updateAppContext = context.update;
+
+  const { location, onNavigate } = props;
+
+  const [forexData, setForexData] = useState(null);
   const [dataSource, setDataSource] = useState(null);
 
-  useEffect(() => {
-    const baseCurrency = StorageManager.localValue('baseCurrency');
-    const { rates } = forexData;
 
-    setDataSource(Object.keys(rates).map((currency) => ({
-      base: baseCurrency,
-      currency,
-      value: rates[currency],
-    })));
-  }, [forexData]);
+  useEffect(() => {
+    const qsParams = qs.parse(location.search);
+    const { base } = qsParams;
+
+    if (!base) {
+      let baseCurrency = StorageManager.localValue('baseCurrency');
+      if (!baseCurrency) {
+        baseCurrency = 'USD';
+        StorageManager.setLocalValue('baseCurrency', baseCurrency);
+      }
+      NavManager.updateUrlParam('base', baseCurrency);
+    } else {
+      if (forexData && forexData.base === base) {
+        return;
+      }
+
+      updateAppContext({ loadProgress: undefined });
+      fetch(`${FOREX_API_ENDPOINT}/latest?base=${base}`)
+        .then((res) => {
+          if (res.status === 200) {
+            res.json().then((data) => {
+              setForexData(data);
+
+              setDataSource(Object.keys(data.rates).map((currency) => ({
+                base,
+                currency,
+                value: data.rates[currency],
+              })));
+            });
+          }
+        })
+        .catch(() => {
+          SnackbarManager.error('Failed to retrieve ForEx data');
+        })
+        .finally(() => {
+          updateAppContext({ loadProgress: null });
+        });
+
+    }
+  }, [updateAppContext, forexData, location]);
 
 
   if (!dataSource) {
@@ -56,6 +93,7 @@ function ForexListView(props) {
 }
 
 ForexListView.propTypes = {
+  location: PropTypes.object.isRequired,
   onNavigate: PropTypes.func.isRequired,
 };
 

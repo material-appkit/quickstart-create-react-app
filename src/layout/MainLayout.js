@@ -1,15 +1,15 @@
 import React, { lazy, useContext } from 'react';
 
-import StorageManager from '@material-appkit/core/managers/StorageManager';
+import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
+
 import NavigationControllerLayout from './NavigationControllerLayout';
 
 import AppContext from 'AppContext';
 import paths from 'paths';
-import { FOREX_API_ENDPOINT } from 'variables';
 
 const routes = [
   { path: paths.dashboard, component: lazy(() => import('pages/DashboardPage')) },
-  { path: paths.forex.index, component: lazy(() => import('pages/ForexListPage')) },
+  { path: paths.forex.index, component: lazy(() => import('pages/ForexIndexPage')) },
 ];
 
 function MainLayout(props) {
@@ -18,30 +18,12 @@ function MainLayout(props) {
   const initialize = () => {
     return new Promise((resolve, reject) => {
       context.update({ loadProgress: undefined });
-
-      let baseCurrency = StorageManager.localValue('baseCurrency');
-      if (!baseCurrency) {
-        baseCurrency = 'USD';
-        StorageManager.setLocalValue('baseCurrency', baseCurrency);
-      }
-
-      fetch(`${FOREX_API_ENDPOINT}/latest?base=${baseCurrency}`)
-        .then((res) => {
-          if (res.status === 200) {
-            res.json().then((data) => {
-              context.update({ forexData: data });
-              resolve();
-            });
-          } else {
-            reject(res);
-          }
-        })
-        .catch((err) => {
-          reject(err);
-        })
-        .finally(() => {
-          context.update({ loadProgress: null });
-        });
+      SnackbarManager.info('Initializing...');
+      setTimeout(() => {
+        SnackbarManager.success('Initialization Complete');
+        context.update({ loadProgress: null });
+        resolve();
+      }, 2000);
     });
   };
 
