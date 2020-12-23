@@ -3,24 +3,20 @@ import qs from 'query-string';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
 
+import ListView from '@material-appkit/core/components/ListView';
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
 
-import 'media/flag_sprites.css';
 
+import ForexHistoryListItem from './ForexHistoryListItem';
 import AppContext from 'AppContext';
 import { FOREX_API_ENDPOINT } from 'variables';
 
+import 'media/flag_sprites.css';
+
 const styles = makeStyles((theme) => ({
-  table: {
-    // width: 400,
-  },
+
 }));
 
 function ForexDetailView(props) {
@@ -31,15 +27,14 @@ function ForexDetailView(props) {
   const context = useContext(AppContext);
   const updateAppContext = context.update;
 
-  const [tableDataSource, setTableDataSource] = useState(null);
-
+  const [dataSource, setDataSource] = useState(null);
 
   useEffect(() => {
     if (!(base && currency)) {
       return;
     }
 
-    setTableDataSource(null);
+    setDataSource(null);
 
     const queryParams = qs.stringify({
       start_at: '2020-01-01',
@@ -54,7 +49,7 @@ function ForexDetailView(props) {
         if (res.status === 200) {
           res.json().then((data) => {
             const orderedDates = Object.keys(data.rates).sort();
-            setTableDataSource(orderedDates.map((date) => ({
+            setDataSource(orderedDates.map((date) => ({
               date,
               value: data.rates[date][currency],
             })));
@@ -72,41 +67,18 @@ function ForexDetailView(props) {
   }, [base, currency, updateAppContext]);
 
 
-  if (!(base && currency && tableDataSource)) {
+  if (!(base && currency && dataSource)) {
     return null;
   }
 
   return (
-    <Table className={classes.table} aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell>
-            <img
-              alt=''
-              className={`flag flag-${base.toLowerCase()}`}
-            />
-
-            <img
-              alt=''
-              className={`flag flag-${currency.toLowerCase()}`}
-            />
-          </TableCell>
-          <TableCell align="right">Exchange Rate</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {tableDataSource.map((rate) => (
-          <TableRow key={rate.date}>
-            <TableCell component="th" scope="row">
-              {rate.date}
-            </TableCell>
-            <TableCell align="right">
-              {rate.value}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <ListView
+      displayMode="list"
+      items={dataSource}
+      itemIdKey="date"
+      listItemComponent={ForexHistoryListItem}
+      windowed
+    />
   );
 }
 

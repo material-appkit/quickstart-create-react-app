@@ -12,10 +12,8 @@ import ListViewItem, {
 function ForexListItem(props) {
   const { currency, value } = props.item;
 
-  const allListItemProps = listItemProps(props);
-
   return (
-    <ListViewItem {...allListItemProps}>
+    <ListViewItem {...listItemProps(props)}>
       <ListItemIcon>
         <img
           alt=''
