@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
+
 import MasterDetailView from '@material-appkit/core/components/MasterDetailView';
 import NavManager from '@material-appkit/core/managers/NavManager';
 import ViewController from '@material-appkit/core/components/ViewController';
@@ -12,7 +14,15 @@ import paths from 'paths';
 import { COMMON_PAGE_PROPS } from 'variables';
 
 
+const styles = makeStyles((theme) => ({
+  listViewContainer: {
+    width: 300,
+  },
+}));
+
 function ForexIndexPage(props) {
+  const classes = styles();
+
   const location = props.location;
   const qsParams = NavManager.qsParams;
   const { base } = qsParams;
@@ -44,6 +54,7 @@ function ForexIndexPage(props) {
         }}
         inspectedObjectLoader={loadForexData}
         itemIdKey="currency"
+        listViewContainerClassName={classes.listViewContainer}
         ListViewComponent={ForexListView}
         location={location}
       />
