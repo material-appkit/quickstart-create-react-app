@@ -9,11 +9,10 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
-
-import Spacer from '@material-appkit/core/components/Spacer';
 
 import ApplicationMenuControl from './ApplicationMenuControl';
 import AppContext from 'AppContext';
@@ -47,6 +46,7 @@ const styles = makeStyles((theme) => ({
   },
 
   appTitle: {
+    flex: 1,
     fontSize: theme.typography.pxToRem(20),
   },
 
@@ -62,7 +62,7 @@ const navLinkArrangement = [
     title: 'Dashboard',
   },
   {
-    Icon: VpnKeyIcon,
+    Icon: AccountBalanceIcon,
     path: paths.forex.index,
     title: 'Foreign Exchange',
   },
@@ -94,8 +94,6 @@ function ApplicationBar(props) {
         <Typography className={classes.appTitle}>
           {process.env.REACT_APP_TITLE}
         </Typography>
-
-        <Spacer />
 
         <IconButton
           className={classes.navButton}

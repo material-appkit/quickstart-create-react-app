@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import ListViewItem, {
@@ -7,15 +8,22 @@ import ListViewItem, {
   commonPropTypes,
 } from '@material-appkit/core/components/ListViewItem';
 
+import CalendarIcon from 'components/CalendarIcon';
+
 
 function ForexHistoryListItem(props) {
-  const { date, value } = props.item;
+  const { date, rate } = props.item;
 
   return (
     <ListViewItem {...listItemProps(props)}>
+      <ListItemIcon>
+        <CalendarIcon date={date} />
+
+      </ListItemIcon>
+
       <ListItemText
-        primary={date}
-        secondary={value}
+        primary={rate}
+        primaryTypographyProps={{ variant: 'h2', component: 'p' }}
       />
     </ListViewItem>
   );

@@ -1,31 +1,25 @@
-import qs from 'query-string';
-
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 
 import ListView from '@material-appkit/core/components/ListView';
+import NavManager from '@material-appkit/core/managers/NavManager';
+import ServiceAgent from '@material-appkit/core/util/ServiceAgent';
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
-
+import SplitView from '@material-appkit/core/components/SplitView';
 
 import ForexHistoryListItem from './ForexHistoryListItem';
-import AppContext from 'AppContext';
 import { FOREX_API_ENDPOINT } from 'variables';
 
 import 'media/flag_sprites.css';
 
-const styles = makeStyles((theme) => ({
-
-}));
 
 function ForexDetailView(props) {
-  const classes = styles();
-
   const { base, currency } = props;
-
-  const context = useContext(AppContext);
-  const updateAppContext = context.update;
 
   const [dataSource, setDataSource] = useState(null);
 
@@ -36,49 +30,72 @@ function ForexDetailView(props) {
 
     setDataSource(null);
 
-    const queryParams = qs.stringify({
+    ServiceAgent.get(`${FOREX_API_ENDPOINT}/history`, {
       start_at: '2020-01-01',
       end_at: '2020-12-31',
       base,
-      symbols: currency,
+      symbols: currency,      
+    }).then((res) => {
+      const rates = res.jsonData.rates;
+      const orderedDates = Object.keys(rates).sort();
+      setDataSource(orderedDates.map((date) => ({
+        date,
+        rate: rates[date][currency],
+      })));
+    }).catch(() => {
+      SnackbarManager.error('Failed to retrieve historical ForEx data');
     });
-
-    updateAppContext({ loadProgress: undefined });
-    fetch(`${FOREX_API_ENDPOINT}/history?${queryParams}`)
-      .then((res) => {
-        if (res.status === 200) {
-          res.json().then((data) => {
-            const orderedDates = Object.keys(data.rates).sort();
-            setDataSource(orderedDates.map((date) => ({
-              date,
-              value: data.rates[date][currency],
-            })));
-          });
-        } else {
-          SnackbarManager.error('Failed to retrieve historical ForEx data');
-        }
-      })
-      .catch(() => {
-        SnackbarManager.error('Failed to retrieve historical ForEx data');
-      })
-      .finally(() => {
-        updateAppContext({ loadProgress: null });
-      });
-  }, [base, currency, updateAppContext]);
+  }, [base, currency]);
 
 
-  if (!(base && currency && dataSource)) {
-    return null;
-  }
+  const handleSwapButtonClick = useCallback(() => {
+    if (!(base && currency)) {
+      return;
+    }
+
+    NavManager.updateUrlParams({
+      base: currency,
+      currency: base,
+    });
+  }, [base, currency]);  
+
 
   return (
-    <ListView
-      displayMode="list"
-      items={dataSource}
-      itemIdKey="date"
-      listItemComponent={ForexHistoryListItem}
-      windowed
-    />
+    <SplitView
+      bar={(
+        <AppBar position="relative" color="default">
+          {(base && currency) &&
+            <Toolbar variant="dense">
+              <img
+                alt=''
+                className={`flag flag-${base.toLowerCase()}`}
+              />
+              <IconButton
+                onClick={handleSwapButtonClick}
+              >
+                <SwapHorizIcon />
+              </IconButton>
+              <img
+                alt=''
+                className={`flag flag-${currency.toLowerCase()}`}
+              />
+            </Toolbar>
+          }
+        </AppBar>
+      )}
+      barSize={56}
+      placement="top"
+    >
+      {dataSource &&
+        <ListView
+          displayMode="list"
+          items={dataSource}
+          itemIdKey="date"
+          listItemComponent={ForexHistoryListItem}
+          windowed
+        />
+      }
+    </SplitView>
   );
 }
 

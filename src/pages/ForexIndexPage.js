@@ -43,7 +43,7 @@ function ForexIndexPage(props) {
         detailPathInfo={(item) => {
           return {
             pathname: reverse(paths.forex.currency, {
-              currency: item.currency.toLowerCase(),
+              currency: item.currency,
             }),
             qsParams: { base },
           }

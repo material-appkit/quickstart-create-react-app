@@ -25,7 +25,7 @@ function MainLayout(props) {
       setTimeout(() => {
         context.update({ loadProgress: null });
         resolve();
-      }, 1000);
+      }, 500);
     });
   };
 
