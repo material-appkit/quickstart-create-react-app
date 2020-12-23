@@ -14,7 +14,7 @@ const PUBLIC_URL = '/quickstart-create-react-app';
 // -----------------------------------------------------------------------------
 function register(config) {
   if (isLocalhost) {
-    console.log('Service worker has been explicitly disabled in localhost environment');
+    // console.log('Service worker has been explicitly disabled in localhost environment');
     return;
   }
 

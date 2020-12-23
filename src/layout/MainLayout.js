@@ -16,8 +16,12 @@ function MainLayout(props) {
   const context = useContext(AppContext);
 
   const initialize = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       context.update({ loadProgress: undefined });
+
+      // This use of setTimeout is to demonstrate that a layout may take
+      // all the time it needs to initialize itself (ex: fetch essential data)
+      // before any of its views are mounted.
       setTimeout(() => {
         context.update({ loadProgress: null });
         resolve();
