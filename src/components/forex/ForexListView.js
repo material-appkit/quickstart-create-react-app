@@ -2,8 +2,14 @@ import PropTypes from 'prop-types';
 
 import React, { useEffect } from 'react';
 
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
+
 import ListView from '@material-appkit/core/components/ListView';
 import NavManager from '@material-appkit/core/managers/NavManager';
+import SplitView from '@material-appkit/core/components/SplitView';
 import StorageManager from '@material-appkit/core/managers/StorageManager';
 
 import ForexListItem from './ForexListItem';
@@ -13,7 +19,19 @@ import 'media/flag_sprites.css';
 import { FOREX_API_ENDPOINT } from 'variables';
 
 
+const styles = makeStyles((theme) => ({
+  toolbar: {
+    paddingLeft: 12,
+  },
+
+  listViewLoading: {
+    opacity: 0.5,
+  },
+}));
+
 function ForexListView(props) {
+  const classes = styles();
+
   const { onNavigate } = props;
 
   const qsParams = NavManager.qsParams;
@@ -44,25 +62,61 @@ function ForexListView(props) {
 
     return { items };
   };
+  
+  
+  const handleBaseCurrencyButtonClick = () => {
+    console.log('display listview dialog');
+  };
 
-  if (!base) {
-    return null;
-  }
 
   return (
-    <ListView
-      displayMode="list"
-      itemIdKey="currency"
-      listItemComponent={ForexListItem}
-      listItemProps={{
-        onItemClick: (item) => {
-          onNavigate(item);
-        },
-      }}
-      responseTransformer={transformFetchItemsResponse}
-      src={`${FOREX_API_ENDPOINT}/latest`}
-      filterParams={{ base }}
-    />
+    <SplitView
+      bar={(
+        <AppBar position="relative" color="default">
+          {base &&
+            <Toolbar
+              className={classes.toolbar}
+              disableGutters
+              variant="dense"
+            >
+              <Button
+                onClick={handleBaseCurrencyButtonClick}
+                startIcon={(
+                  <img
+                    alt=''
+                    className={`flag flag-${base.toLowerCase()}`}
+                  />
+                )}
+              >
+                Base Currency
+              </Button>
+            </Toolbar>
+          }
+        </AppBar>
+      )}
+      barSize={56}
+      placement="top"
+      scrollContent
+    >
+      {base &&
+        <ListView
+          classes={{
+            listViewLoading: classes.listViewLoading,
+          }}
+          displayMode="list"
+          itemIdKey="currency"
+          listItemComponent={ForexListItem}
+          listItemProps={{
+            onItemClick: (item) => {
+              onNavigate(item);
+            },
+          }}
+          responseTransformer={transformFetchItemsResponse}
+          src={`${FOREX_API_ENDPOINT}/latest`}
+          filterParams={{ base }}
+        />
+      }
+    </SplitView>
   );
 }
 

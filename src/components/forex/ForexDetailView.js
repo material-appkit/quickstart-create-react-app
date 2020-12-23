@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import ListView from '@material-appkit/core/components/ListView';
 import NavManager from '@material-appkit/core/managers/NavManager';
@@ -85,6 +85,7 @@ function ForexDetailView(props) {
       )}
       barSize={56}
       placement="top"
+      scrollContent
     >
       <ListView
         displayMode="list"
