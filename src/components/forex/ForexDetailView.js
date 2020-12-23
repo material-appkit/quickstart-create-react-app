@@ -86,15 +86,13 @@ function ForexDetailView(props) {
       barSize={56}
       placement="top"
     >
-      {dataSource &&
-        <ListView
-          displayMode="list"
-          items={dataSource}
-          itemIdKey="date"
-          listItemComponent={ForexHistoryListItem}
-          windowed
-        />
-      }
+      <ListView
+        displayMode="list"
+        itemIdKey="date"
+        items={dataSource}
+        listItemComponent={ForexHistoryListItem}
+        windowed
+      />
     </SplitView>
   );
 }
