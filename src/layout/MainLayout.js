@@ -1,7 +1,5 @@
 import React, { lazy, useContext } from 'react';
 
-import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
-
 import NavigationControllerLayout from './NavigationControllerLayout';
 
 import AppContext from 'AppContext';
@@ -20,9 +18,7 @@ function MainLayout(props) {
   const initialize = () => {
     return new Promise((resolve, reject) => {
       context.update({ loadProgress: undefined });
-      SnackbarManager.info('Initializing...');
       setTimeout(() => {
-        SnackbarManager.success('Initialization Complete');
         context.update({ loadProgress: null });
         resolve();
       }, 1000);
