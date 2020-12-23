@@ -14,7 +14,7 @@ const PUBLIC_URL = '/quickstart-create-react-app';
 // -----------------------------------------------------------------------------
 function register(config) {
   if (isLocalhost) {
-    console.log('Service worker has been explicitly disabled in localhost environment');
+    // console.log('Service worker has been explicitly disabled in localhost environment');
     return;
   }
 
@@ -105,7 +105,7 @@ function checkValidServiceWorker(swUrl, config) {
   fetch(swUrl, {
     headers: { 'Service-Worker': 'script' },
   })
-    .then(response => {
+    .then((response) => {
       // Ensure service worker exists, and that we really are getting a JS file.
       const contentType = response.headers.get('content-type');
       if (
@@ -128,20 +128,6 @@ function checkValidServiceWorker(swUrl, config) {
         'No internet connection found. App is running in offline mode.'
       );
     });
-}
-
-
-// -----------------------------------------------------------------------------
-function unregister() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready
-      .then(registration => {
-        registration.unregister();
-      })
-      .catch(error => {
-        console.error(error.message);
-      });
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -287,16 +273,17 @@ window.addEventListener('error', async(err) => {
   // is getting installed or is installed but waiting to be activated.
   // This will make sure we don't run this code on a sane environment
   // that is crashing for an error not related to stale app cache.
-  const registration = await navigator.serviceWorker.ready;
-  if (registration.installing || registration.waiting) {
-    navigator.serviceWorker.ready.then(async registration => {
-      console.error('Unregistering serviceworker', err);
-      await registration.unregister();
-      // Once the service worker is unregistered, we can reload
-      // the page to let the browser download a fresh copy of our app
-      window.location.reload();
+    navigator.serviceWorker.ready.then(async(registration) => {
+      if (registration.installing || registration.waiting) {
+        console.error('Unregistering service worker');
+        await registration.unregister();
+        // Once the service worker is unregistered, we can reload
+        // the page to let the browser download a fresh copy of our app
+        window.location.reload();
+      } else {
+        registration.update();
+      }
     });
-  }
 });
 
 initialize();
