@@ -9,7 +9,7 @@ import { reverse } from '@material-appkit/core/util/urls';
 
 import ForexListView from 'components/forex/ForexListView';
 import ForexDetailView from 'components/forex/ForexDetailView';
-
+import ForexDetailViewPlaceholder from 'components/forex/ForexDetailViewPlaceholder';
 import paths from 'paths';
 import { COMMON_PAGE_PROPS } from 'variables';
 
@@ -37,9 +37,7 @@ function ForexIndexPage(props) {
     <ViewController title="Foreign Exchange" {...props}>
       <MasterDetailView
         DetailViewComponent={ForexDetailView}
-        detailViewPlaceholder={(
-          <p>Forex Detail View Placeholder</p>
-        )}
+        detailViewPlaceholder={<ForexDetailViewPlaceholder />}
         detailPathInfo={(item) => {
           return {
             pathname: reverse(paths.forex.currency, {
