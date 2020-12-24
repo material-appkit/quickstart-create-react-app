@@ -69,12 +69,10 @@ function LoginForm(props) {
     AuthManager.authenticate(credentials)
       .then((authInfo) => {
         context.update({ authInfo });
-        NavManager.navigate(paths.dashboard);
-
-      })
-      .finally(() => {
+        NavManager.navigate(paths.dashboard)
+      }).catch(() => {
         setLoading(false);
-      })
+      });
   };
 
 
