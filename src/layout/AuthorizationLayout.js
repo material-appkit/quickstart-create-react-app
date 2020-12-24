@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { lazy, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Container from '@material-ui/core/Container';
 import { useTheme } from '@material-ui/core/styles';
 
 import SplitView from '@material-appkit/core/components/SplitView';
@@ -38,34 +37,29 @@ function AuthorizationLayout(props) {
       barSize={theme.topbar.height}
       placement="top"
     >
-      <Container
-        disableGutters
-        maxWidth={props.maxWidth}
-      >
-        <Switch>
-          {routes.map((routeInfo) => {
-            let exact = true;
-            if (isValue(routeInfo.exact)) {
-              exact = routeInfo.exact;
-            }
-            return (
-              <Route
-                exact={exact}
-                key={routeInfo.path}
-                path={routeInfo.path}
-                render={(routeProps) => (
-                  <routeInfo.component
-                    location={props.location}
-                    match={routeProps.match}
-                    onMount={handleViewControllerMount}
-                  />
-                )}
-              />
-            );
-          })}
-          <Redirect to={paths.auth.login} />
-        </Switch>
-      </Container>
+      <Switch>
+        {routes.map((routeInfo) => {
+          let exact = true;
+          if (isValue(routeInfo.exact)) {
+            exact = routeInfo.exact;
+          }
+          return (
+            <Route
+              exact={exact}
+              key={routeInfo.path}
+              path={routeInfo.path}
+              render={(routeProps) => (
+                <routeInfo.component
+                  location={props.location}
+                  match={routeProps.match}
+                  onMount={handleViewControllerMount}
+                />
+              )}
+            />
+          );
+        })}
+        <Redirect to={paths.auth.login} />
+      </Switch>
     </SplitView>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ViewController from '@material-appkit/core/components/ViewController';
@@ -15,21 +16,24 @@ import paths  from 'paths';
 import { NAVIGATION_CONTROLLER_PAGE_PROPS } from 'variables';
 
 const styles = makeStyles((theme) => ({
-  paper: {
-    margin: '40px auto',
-    overflow: 'hidden',
+  main: {
+    backgroundColor: theme.palette.grey[200],
+    height: '100%',
+    paddingTop: 40,
+  },
+
+  card: {
+    margin: 'auto',
     width: 360,
     maxWidth: '90%',
   },
 
-  formContainer: {
-    padding: theme.spacing(3),
+  cardHeader: {
+    borderBottom: `1px solid ${theme.palette.grey[200]}`,
   },
 
-  heading: {
-    borderBottom: `1px solid ${theme.palette.grey[200]}`,
+  cardHeaderTitle: {
     fontSize: theme.typography.pxToRem(20),
-    paddingBottom: theme.spacing(2),
     textAlign: 'center',
   },
 }));
@@ -39,7 +43,7 @@ function AuthorizationPage(props) {
   const classes = styles();
 
   const [loading, setLoading] = useState(false);
-  const [title, setTitle] = useState('My Form Title');
+  const [title, setTitle] = useState('');
 
   const routes = [
     { path: paths.auth.login, Component: LoginForm },
@@ -48,23 +52,26 @@ function AuthorizationPage(props) {
 
   return (
     <ViewController title="Sign In" {...props}>
-      <main>
-        <Paper className={classes.paper} elevation={1}>
+      <main className={classes.main}>
+        <Card className={classes.card}>
           <LinearProgress style={{ visibility: loading ? 'visible' : 'hidden' }} />
 
-          <div className={classes.formContainer}>
-            <Typography component="h1" className={classes.heading}>
-              {title}
-            </Typography>
-
+          <CardHeader
+            classes={{
+              root: classes.cardHeader,
+              title: classes.cardHeaderTitle,
+            }}
+            title={title}
+          />
+          <CardContent>
             <Switch>
-              {routes.map((routeInfo) => (
+              {routes.map(({ path, Component }) => (
                 <Route
                   exact
-                  key={routeInfo.path}
-                  path={routeInfo.path}
+                  key={path}
+                  path={path}
                   render={(routeProps) => (
-                    <routeInfo.Component
+                    <Component
                       location={props.location}
                       match={routeProps.match}
                       loading={loading}
@@ -76,8 +83,8 @@ function AuthorizationPage(props) {
               ))}
               <Redirect to={paths.auth.login} />
             </Switch>
-          </div>
-        </Paper>
+          </CardContent>
+        </Card>
       </main>
     </ViewController>
   );
