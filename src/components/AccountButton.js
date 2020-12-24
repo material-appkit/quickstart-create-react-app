@@ -52,25 +52,19 @@ function AccountButton({ authInfo }) {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const signOut = () => {
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  const handleSignOutButtonClick = () => {
+    handlePopoverClose();
+
     AuthManager.logout();
     context.update({ authInfo: null });
     NavManager.navigate(paths.dashboard);
   };
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handlePopoverButtonClick = (e) => {
-    setAnchorEl(e.currentTarget);
-
-  };
-
-  const handleSignOutButtonClick = () => {
-    handlePopoverClose();
-    signOut();
-  };
 
   const handleReloadButtonClick = () => {
     window.location.reload();
@@ -81,7 +75,7 @@ function AccountButton({ authInfo }) {
       <IconButton
         color="inherit"
         edge="start"
-        onClick={handlePopoverButtonClick}
+        onClick={(e) => setAnchorEl(e.currentTarget)}
       >
         <SettingsIcon />
       </IconButton>

@@ -79,7 +79,7 @@ function NavigationControllerLayout(props) {
 
   return (
     <SplitView
-      bar={<ApplicationBar />}
+      bar={<ApplicationBar location={location} />}
       barSize={theme.topbar.height}
       placement="top"
     >

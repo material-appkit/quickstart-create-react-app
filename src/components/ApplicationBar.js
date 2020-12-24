@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -59,7 +60,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 
-function ApplicationBar(props) {
+function ApplicationBar({ location }) {
   const classes = styles();
 
   const context = useContext(AppContext);
@@ -124,7 +125,10 @@ function ApplicationBar(props) {
           <Link
             className={classes.signInLink}
             component={RouterLink}
-            to={paths.auth.login}
+            to={{
+              pathname: paths.auth.login,
+              state: { referrer: location },
+            }}
           >
             Sign In
           </Link>
@@ -134,4 +138,8 @@ function ApplicationBar(props) {
   );
 }
 
-export default ApplicationBar;
+ApplicationBar.propTypes = {
+  location: PropTypes.object,  
+};
+
+export default React.memo(ApplicationBar);

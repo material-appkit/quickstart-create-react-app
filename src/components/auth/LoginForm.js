@@ -9,8 +9,8 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AttributedTextField from '@material-appkit/core/components/AttributedTextField';
-import NavManager from '@material-appkit/core/managers/NavManager';
 import { useInit } from '@material-appkit/core/util/hooks';
+import { valueForKeyPath } from '@material-appkit/core/util/object';
 
 import AuthManager from 'managers/AuthManager';
 
@@ -39,7 +39,7 @@ function LoginForm(props) {
 
   const { loading, setLoading, setTitle } = props;
 
-  const [redirectTo] = useState(null);
+  const [redirectTo, setRedirectTo] = useState(null);
 
   const [credentials, setCredentials] = useState({
     email: '',
@@ -69,7 +69,16 @@ function LoginForm(props) {
     AuthManager.authenticate(credentials)
       .then((authInfo) => {
         context.update({ authInfo });
-        NavManager.navigate(paths.dashboard)
+
+        let redirectInfo = paths.dashboard;
+        const referrer = valueForKeyPath(props, 'location.state.referrer');
+        if (referrer && referrer.pathname !== window.location.pathname) {
+          redirectInfo = {
+            pathname: referrer.pathname,
+            search: referrer.search,
+          };
+        }
+        setRedirectTo(redirectInfo);
       }).catch(() => {
         setLoading(false);
       });
