@@ -11,15 +11,16 @@ import NavManager from '@material-appkit/core/managers/NavManager';
 import ServiceAgent from '@material-appkit/core/util/ServiceAgent';
 import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
 import SplitView from '@material-appkit/core/components/SplitView';
+import { reverse } from '@material-appkit/core/util/urls';
 
 import ForexHistoryListItem from './ForexHistoryListItem';
+import paths from 'paths';
 import { FOREX_API_ENDPOINT } from 'variables';
 
 import 'media/flag_sprites.css';
 
-
 function ForexDetailView(props) {
-  const { base, currency } = props;
+  const { base, currency, standalone } = props;
 
   const [dataSource, setDataSource] = useState(null);
 
@@ -34,7 +35,7 @@ function ForexDetailView(props) {
       start_at: '2020-01-01',
       end_at: '2020-12-31',
       base,
-      symbols: currency,      
+      symbols: currency,
     }).then((res) => {
       const rates = res.jsonData.rates;
       const orderedDates = Object.keys(rates).sort();
@@ -53,11 +54,17 @@ function ForexDetailView(props) {
       return;
     }
 
-    NavManager.updateUrlParams({
-      base: currency,
-      currency: base,
-    });
-  }, [base, currency]);  
+    if (standalone) {
+      const params = { base: currency };
+      const path = reverse(paths.forex.currency, { currency: base });
+      NavManager.setUrlParams(params, path);
+    } else {
+      NavManager.updateUrlParams({
+        base: currency,
+        currency: base,
+      });
+    }
+  }, [base, currency, standalone]);
 
 
   return (
@@ -68,7 +75,7 @@ function ForexDetailView(props) {
             <Toolbar variant="dense">
               <img
                 alt=''
-                className={`flag flag-${base.toLowerCase()}`}
+                className={`flag flag-${base}`}
               />
               <IconButton
                 onClick={handleSwapButtonClick}
@@ -77,13 +84,13 @@ function ForexDetailView(props) {
               </IconButton>
               <img
                 alt=''
-                className={`flag flag-${currency.toLowerCase()}`}
+                className={`flag flag-${currency}`}
               />
             </Toolbar>
           }
         </AppBar>
       )}
-      barSize={56}
+      barSize={48}
       placement="top"
       scrollContent
     >
@@ -91,6 +98,7 @@ function ForexDetailView(props) {
         displayMode="list"
         itemIdKey="date"
         items={dataSource}
+        loadingVariant="linear"
         listItemComponent={ForexHistoryListItem}
         windowed
       />
@@ -99,8 +107,9 @@ function ForexDetailView(props) {
 }
 
 ForexDetailView.propTypes = {
-  base: PropTypes.string,
-  currency: PropTypes.string,
+  base: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+  standalone: PropTypes.bool,
 };
 
 export default ForexDetailView;
