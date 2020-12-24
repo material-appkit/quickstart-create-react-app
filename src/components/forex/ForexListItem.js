@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -10,10 +11,11 @@ import ListViewItem, {
 
 
 function ForexListItem(props) {
-  const { currency, value } = props.item;
+  const { displayRate, ...rest } = props;
+  const { currency, rate } = props.item;
 
   return (
-    <ListViewItem {...listItemProps(props)}>
+    <ListViewItem {...listItemProps(rest)}>
       <ListItemIcon>
         <img
           alt=''
@@ -22,12 +24,15 @@ function ForexListItem(props) {
       </ListItemIcon>
       <ListItemText
         primary={currency}
-        secondary={value}
+        secondary={displayRate ? rate : null}
       />
     </ListViewItem>
   );
 }
 
-ForexListItem.propTypes = commonPropTypes;
+ForexListItem.propTypes = {
+  ...commonPropTypes,
+  displayRate: PropTypes.bool,
+};
 
 export default ForexListItem;
