@@ -57,6 +57,27 @@ const theme = createMuiTheme({
     },
   },
 
+  mixins: {
+    toolbar: {
+      [baseTheme.breakpoints.down('md')]: {
+        minHeight: NAVBAR_HEIGHT,
+      },
+    },
+
+    actionButton: {
+      fontSize: baseTheme.typography.pxToRem(16),
+      margin: baseTheme.spacing(2, 0),
+      width: '100%',
+    },
+
+    linkButton: {
+      color: baseTheme.palette.text.primary,
+      fontSize: baseTheme.typography.pxToRem(14),
+      fontWeight: 600,
+      textDecoration: 'underline',
+    },
+  },
+
   typography: {
     button: {
       textTransform: 'none',
@@ -162,21 +183,6 @@ const theme = createMuiTheme({
 
   sidebar: {
     width: SIDEBAR_WIDTH,
-  },
-
-  mixins: {
-    actionButton: {
-      fontSize: baseTheme.typography.pxToRem(16),
-      margin: baseTheme.spacing(2, 0),
-      width: '100%',
-    },
-
-    linkButton: {
-      color: baseTheme.palette.text.primary,
-      fontSize: baseTheme.typography.pxToRem(14),
-      fontWeight: 600,
-      textDecoration: 'underline',
-    },
   },
 });
 
