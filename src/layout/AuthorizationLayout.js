@@ -8,7 +8,7 @@ import { useTheme } from '@material-ui/core/styles';
 import SplitView from '@material-appkit/core/components/SplitView';
 import { isValue } from '@material-appkit/core/util/value';
 
-import ApplicationBar from 'layout/ApplicationBar';
+import ApplicationBar from 'components/ApplicationBar';
 
 import AppContext from 'AppContext';
 import paths from 'paths';

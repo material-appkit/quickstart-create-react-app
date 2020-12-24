@@ -75,8 +75,10 @@ function ForgotPasswordForm(props) {
 
       <Link
         className={classes.linkButton}
+        color="textPrimary"
         component={RouterLink}
         to={paths.auth.index}
+        underline="always"
       >
         {intl.get('BACK_TO_LOGIN')}
       </Link>

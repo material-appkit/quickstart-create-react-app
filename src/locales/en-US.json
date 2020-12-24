@@ -7,7 +7,9 @@
   "EMAIL_ADDRESS": "E-mail Address",
   "FORGOT_PASSWORD": "Forgot Password",
   "PASSWORD": "Password",
+  "RELOAD": "Reload",
   "REQUEST_PASSWORD_RESET": "Request Password Reset",
   "REQUESTING_PASSWORD_RESET": "Requesting Password Reset...",
-  "SIGN_IN": "Sign in"
+  "SIGN_IN": "Sign in",
+  "SIGN_OUT": "Sign out"
 }

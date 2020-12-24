@@ -13,7 +13,7 @@ import ForgotPasswordForm from 'components/auth/ForgotPasswordForm';
 import LoginForm from 'components/auth/LoginForm';
 
 import paths  from 'paths';
-import { NAVIGATION_CONTROLLER_PAGE_PROPS } from 'variables';
+import { COMMON_PAGE_PROPS } from 'variables';
 
 const styles = makeStyles((theme) => ({
   main: {
@@ -90,6 +90,6 @@ function AuthorizationPage(props) {
   );
 }
 
-AuthorizationPage.propTypes = NAVIGATION_CONTROLLER_PAGE_PROPS;
+AuthorizationPage.propTypes = COMMON_PAGE_PROPS;
 
 export default AuthorizationPage;

@@ -1,12 +1,7 @@
-/**
-*
-* LoginForm
-*
-*/
 import intl from 'react-intl-universal';
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link as RouterLink, Redirect } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
@@ -14,8 +9,12 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AttributedTextField from '@material-appkit/core/components/AttributedTextField';
+import NavManager from '@material-appkit/core/managers/NavManager';
 import { useInit } from '@material-appkit/core/util/hooks';
 
+import AuthManager from 'managers/AuthManager';
+
+import AppContext from 'AppContext';
 import paths from 'paths';
 
 
@@ -36,6 +35,7 @@ const styles = makeStyles((theme) => ({
 
 function LoginForm(props) {
   const classes = styles();
+  const context = useContext(AppContext);
 
   const { loading, setLoading, setTitle } = props;
 
@@ -65,16 +65,18 @@ function LoginForm(props) {
   const handleLoginFormSubmit = (e) => {
     e.preventDefault();
 
-    authenticate(e.target);
-  };
-
-  const authenticate = async() => {
     setLoading(true);
+    AuthManager.authenticate(credentials)
+      .then((authInfo) => {
+        context.update({ authInfo });
+        NavManager.navigate(paths.dashboard);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   };
+
 
   if (redirectTo) {
     return <Redirect to={redirectTo} />;
@@ -118,8 +120,10 @@ function LoginForm(props) {
 
       <Link
         className={classes.linkButton}
+        color="textPrimary"
         component={RouterLink}
         to={paths.auth.forgotPassword}
+        underline="always"
       >
         {intl.get('FORGOT_PASSWORD')}
       </Link>

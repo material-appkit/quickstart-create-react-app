@@ -71,10 +71,8 @@ const theme = createMuiTheme({
     },
 
     linkButton: {
-      color: baseTheme.palette.text.primary,
       fontSize: baseTheme.typography.pxToRem(14),
       fontWeight: 600,
-      textDecoration: 'underline',
     },
   },
 

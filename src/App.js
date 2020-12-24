@@ -1,17 +1,17 @@
 import intl from 'react-intl-universal';
 import isEqual from 'lodash.isequal';
-
 import PropTypes from 'prop-types';
 
 import React, { Suspense } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import withWidth from '@material-ui/core/withWidth';
 
 import NavManager from '@material-appkit/core/managers/NavManager';
 import { filterByKeys } from '@material-appkit/core/util/object';
+
+import AuthManager from 'managers/AuthManager';
 
 import PlaceholderLayout from 'layout/PlaceholderLayout';
 
@@ -43,9 +43,11 @@ class App extends React.PureComponent {
     ];
 
     this.state = {
+      initialized: false,
       layoutConfig: null,
 
       appContext: {
+        authInfo: AuthManager.authInfo,
         loadProgress: null,
         locale: activeLocale(),
         pageTitle: null,

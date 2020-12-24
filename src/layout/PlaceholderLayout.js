@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ApplicationBar from './ApplicationBar';
+import ApplicationBar from 'components/ApplicationBar';
 
 function PlaceholderLayout(props) {
   return (

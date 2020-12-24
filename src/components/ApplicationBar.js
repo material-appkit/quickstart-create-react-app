@@ -1,25 +1,34 @@
+import intl from 'react-intl-universal';
+
 import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Link from '@material-ui/core/Link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 import { isValue } from '@material-appkit/core/util/value';
 
 import ApplicationMenuControl from './ApplicationMenuControl';
+import AccountButton from './AccountButton';
+
 import AppContext from 'AppContext';
 import paths from 'paths';
 
 //------------------------------------------------------------------------------
 const styles = makeStyles((theme) => ({
+  signInLink: {
+    ...theme.mixins.linkButton,
+    color: 'inherit',
+    padding: theme.spacing(1),
+  },
+
   appBar: {
     zIndex: theme.zIndex.appBar + 2,
     justifyContent: 'center',
@@ -49,10 +58,6 @@ const styles = makeStyles((theme) => ({
     flex: 1,
     fontSize: theme.typography.pxToRem(20),
   },
-
-  navButton: {
-    color: theme.palette.common.white,
-  },
 }));
 
 
@@ -60,7 +65,7 @@ function ApplicationBar(props) {
   const classes = styles();
 
   const context = useContext(AppContext);
-  const { loadProgress } = context;
+  const { authInfo, loadProgress } = context;
 
   let linearProgressProps = null;
   if (loadProgress === undefined) {
@@ -81,6 +86,13 @@ function ApplicationBar(props) {
       elevation={2}
       position="static"
     >
+      {linearProgressProps &&
+        <LinearProgress
+          className={classes.progressBar}
+          {...linearProgressProps}
+        />
+      }
+
       <Toolbar className={classes.toolBar}>
         <ApplicationMenuControl
           navLinkArrangement={[
@@ -106,21 +118,20 @@ function ApplicationBar(props) {
           {process.env.REACT_APP_TITLE}
         </Typography>
 
-        <IconButton
-          className={classes.navButton}
-          component={RouterLink}
-          to={paths.auth.login}
-        >
-          <VpnKeyIcon />
-        </IconButton>
+        {authInfo ? (
+          <AccountButton
+            authInfo={authInfo}
+          />
+        ) : (
+          <Link
+            className={classes.signInLink}
+            component={RouterLink}
+            to={paths.auth.login}
+          >
+            {intl.get('SIGN_IN')}
+          </Link>
+        )}
       </Toolbar>
-
-      {linearProgressProps &&
-        <LinearProgress
-          className={classes.progressBar}
-          {...linearProgressProps}
-        />
-      }
     </AppBar>
   );
 }

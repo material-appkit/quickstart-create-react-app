@@ -13,7 +13,7 @@ import { matchesForPath } from '@material-appkit/core/util/urls';
 
 import { useInit } from '@material-appkit/core/util/hooks';
 
-import ApplicationBar from 'layout/ApplicationBar';
+import ApplicationBar from 'components/ApplicationBar';
 
 import AppContext from 'AppContext';
 
