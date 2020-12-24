@@ -9,9 +9,10 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 
 import AttributedTextField from '@material-appkit/core/components/AttributedTextField';
+import NavManager from '@material-appkit/core/managers/NavManager';
 import { useInit } from '@material-appkit/core/util/hooks';
 
-import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
+import AuthManager from 'managers/AuthManager';
 
 import paths from 'paths';
 
@@ -32,31 +33,36 @@ function ForgotPasswordForm(props) {
     setTitle(intl.get('FORGOT_PASSWORD'));
   });
 
-  const handleFormSubmit = async(e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     setLoading(true);
-
-    setTimeout(() => {
-      SnackbarManager.info(`Password reset instructions have been emailed to "${email}"`);
-      setLoading(false);
-    }, 1000);
+    AuthManager.sendPasswordReset(email)
+      .then(() => {
+        setLoading(false);
+        NavManager.navigate(
+          paths.auth.passwordResetMailSent,
+          null,
+          true,
+          { email }
+        );
+      });
   };
 
 
   return (
     <form onSubmit={handleFormSubmit}>
       <AttributedTextField
-        fullWidth
         autoFocus
         className={classes.textfield}
-        type="email"
-        label={intl.get('EMAIL_ADDRESS')}
+        fullWidth
         InputProps={{
           autoCorrect: "off",
           autoCapitalize: "none",
         }}
+        label={intl.get('EMAIL_ADDRESS')}
         onChange={(value) => setEmail(value)}
+        type="email"
         value={email}
         variant="contained"
       />
@@ -66,9 +72,9 @@ function ForgotPasswordForm(props) {
         color="secondary"
         disabled={!email || loading}
         fullWidth
-        variant="contained"
         size="large"
         type="submit"
+        variant="contained"
       >
         {loading ? intl.get('REQUESTING_PASSWORD_RESET') : intl.get('REQUEST_PASSWORD_RESET') }
       </Button>

@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ViewController from '@material-appkit/core/components/ViewController';
 
 import ForgotPasswordForm from 'components/auth/ForgotPasswordForm';
+import ForgotPasswordMailSent from 'components/auth/ForgotPasswordMailSent';
 import LoginForm from 'components/auth/LoginForm';
 
 import paths  from 'paths';
@@ -48,6 +49,7 @@ function AuthorizationPage(props) {
   const routes = [
     { path: paths.auth.login, Component: LoginForm },
     { path: paths.auth.forgotPassword, Component: ForgotPasswordForm },
+    { path: paths.auth.passwordResetMailSent, Component: ForgotPasswordMailSent },
   ];
 
   return (

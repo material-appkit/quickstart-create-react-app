@@ -9,19 +9,39 @@ class AuthManager {
 
   static authenticate(credentials) {
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const authInfo = {
-          email: credentials.email,
-        };
+      if (typeof(credentials) === 'object') {
+        const authInfo = { email: credentials.email };
 
-        StorageManager.setLocalValue(
-          'authInfo', JSON.stringify(authInfo)
-        );
-        resolve(authInfo);
-      }, 500);
-
+        // eslint-disable-next-line no-console
+        console.log('TODO: Send authentication request', authInfo);
+        setTimeout(() => {
+          StorageManager.setLocalValue(
+            'authInfo', JSON.stringify(authInfo)
+          );
+          resolve(authInfo);
+        }, 500);
+      } else {
+        reject();
+      }
     });
   }
+
+
+  static sendPasswordReset(email) {
+    return new Promise((resolve, reject) => {
+      if (email) {
+        // eslint-disable-next-line no-console
+        console.log('TODO: Send password reset email');
+
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      } else {
+        reject();
+      }
+    });
+  }
+
 
   static logout() {
     StorageManager.removeLocalValue('authInfo');
