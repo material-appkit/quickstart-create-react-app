@@ -1,5 +1,3 @@
-import intl from 'react-intl-universal';
-
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 
@@ -112,14 +110,14 @@ function AccountButton({ authInfo }) {
             <ListItemIcon className={classes.listItemIcon}>
               <RefreshIcon />
             </ListItemIcon>
-            <ListItemText primary={intl.get('RELOAD')} />
+            <ListItemText primary="Reload" />
           </ListItem>
 
           <ListItem button onClick={handleSignOutButtonClick}>
             <ListItemIcon className={classes.listItemIcon}>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText primary={intl.get('SIGN_OUT')} />
+            <ListItemText primary="Sign Out" />
           </ListItem>
         </List>
       </Popover>

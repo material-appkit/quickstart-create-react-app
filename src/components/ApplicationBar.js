@@ -1,5 +1,3 @@
-import intl from 'react-intl-universal';
-
 import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -128,7 +126,7 @@ function ApplicationBar(props) {
             component={RouterLink}
             to={paths.auth.login}
           >
-            {intl.get('SIGN_IN')}
+            Sign In
           </Link>
         )}
       </Toolbar>
