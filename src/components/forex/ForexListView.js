@@ -50,22 +50,22 @@ function ForexListView(props) {
 
 
   const transformFetchItemsResponse = (res) => {
-    const responseData = res.jsonData;
-    const { rates } = responseData;
-    const sortedCurrencies = Object.keys(rates).sort();
-
-    const items = sortedCurrencies.map((currency) => ({
-      base,
-      currency,
-      value: rates[currency],
-    }));
+    const rates = res.jsonData.rates;
+    const items = Object.keys(rates)
+      .filter((v) => v.toUpperCase() !== base.toUpperCase())
+      .sort()
+      .map((currency) => ({
+        base,
+        currency,
+        value: rates[currency],
+      }));
 
     return { items };
   };
 
 
   const handleBaseCurrencyButtonClick = () => {
-
+    console.log('here');
   };
 
 
