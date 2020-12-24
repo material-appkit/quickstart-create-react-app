@@ -9,7 +9,7 @@ const isLocalhost = Boolean(
   )
 );
 
-const PUBLIC_URL = '/quickstart-create-react-app';
+const PUBLIC_URL = '';
 
 // -----------------------------------------------------------------------------
 function register(config) {
