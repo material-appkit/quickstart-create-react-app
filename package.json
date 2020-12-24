@@ -1,11 +1,11 @@
 {
-  "name": "@material-appkit/quickstart-create-react-app",
+  "name": "@material-appkit/cra-quickstart",
   "version": "1.0.0",
   "author": "Allan Hart",
   "keywords": [],
   "description": "Material-AppKit PWA Starter",
   "private": true,
-  "homepage": "/quickstart-create-react-app",
+  "homepage": "/",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
