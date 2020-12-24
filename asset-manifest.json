@@ -1,0 +1,33 @@
+{
+  "files": {
+    "static/js/0.0591f89c.chunk.js": "/quickstart-create-react-app/static/js/0.0591f89c.chunk.js",
+    "static/css/1.789a6100.chunk.css": "/quickstart-create-react-app/static/css/1.789a6100.chunk.css",
+    "static/js/1.2b699d94.chunk.js": "/quickstart-create-react-app/static/js/1.2b699d94.chunk.js",
+    "static/js/2.785f74aa.chunk.js": "/quickstart-create-react-app/static/js/2.785f74aa.chunk.js",
+    "static/js/3.a32c0e68.chunk.js": "/quickstart-create-react-app/static/js/3.a32c0e68.chunk.js",
+    "main.js": "/quickstart-create-react-app/static/js/main.f97e3b3f.chunk.js",
+    "runtime-main.js": "/quickstart-create-react-app/static/js/runtime-main.6a0dc31a.js",
+    "static/js/6.4b901e73.chunk.js": "/quickstart-create-react-app/static/js/6.4b901e73.chunk.js",
+    "static/js/7.4e4adc3e.chunk.js": "/quickstart-create-react-app/static/js/7.4e4adc3e.chunk.js",
+    "static/js/8.c7f87d7f.chunk.js": "/quickstart-create-react-app/static/js/8.c7f87d7f.chunk.js",
+    "static/js/9.86e5d0ca.chunk.js": "/quickstart-create-react-app/static/js/9.86e5d0ca.chunk.js",
+    "static/js/10.025a2adc.chunk.js": "/quickstart-create-react-app/static/js/10.025a2adc.chunk.js",
+    "static/js/11.9964e069.chunk.js": "/quickstart-create-react-app/static/js/11.9964e069.chunk.js",
+    "static/js/12.24c479e1.chunk.js": "/quickstart-create-react-app/static/js/12.24c479e1.chunk.js",
+    "static/js/13.a5e03d7f.chunk.js": "/quickstart-create-react-app/static/js/13.a5e03d7f.chunk.js",
+    "static/js/14.ce2527ad.chunk.js": "/quickstart-create-react-app/static/js/14.ce2527ad.chunk.js",
+    "index.html": "/quickstart-create-react-app/index.html",
+    "service-worker.js": "/quickstart-create-react-app/service-worker.js",
+    "static/js/2.785f74aa.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/2.785f74aa.chunk.js.LICENSE.txt",
+    "static/js/6.4b901e73.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/6.4b901e73.chunk.js.LICENSE.txt",
+    "static/js/9.86e5d0ca.chunk.js.LICENSE.txt": "/quickstart-create-react-app/static/js/9.86e5d0ca.chunk.js.LICENSE.txt",
+    "static/media/application-logo.svg": "/quickstart-create-react-app/static/media/application-logo.024bc40a.svg",
+    "static/media/cra-logo.7fdad8e3.svg": "/quickstart-create-react-app/static/media/cra-logo.7fdad8e3.svg",
+    "static/media/flag_sprites.css": "/quickstart-create-react-app/static/media/flag_sprites.9302f505.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6a0dc31a.js",
+    "static/js/6.4b901e73.chunk.js",
+    "static/js/main.f97e3b3f.chunk.js"
+  ]
+}
