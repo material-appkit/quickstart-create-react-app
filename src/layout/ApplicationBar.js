@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useContext } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -14,6 +12,8 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
+import { isValue } from '@material-appkit/core/util/value';
+
 import ApplicationMenuControl from './ApplicationMenuControl';
 import AppContext from 'AppContext';
 import paths from 'paths';
@@ -27,11 +27,11 @@ const styles = makeStyles((theme) => ({
   },
 
   progressBar: {
+    bottom: 0,
     height: 2,
     left: 0,
     position: 'absolute',
     right: 0,
-    top: 62,
   },
 
   titleContainer: {
@@ -55,29 +55,24 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const navLinkArrangement = [
-  {
-    Icon: DashboardIcon,
-    path: paths.dashboard,
-    title: 'Dashboard',
-  },
-  {
-    Icon: AccountBalanceIcon,
-    path: paths.forex.index,
-    title: 'Foreign Exchange',
-  },
-  {
-    Icon: GitHubIcon,
-    href: 'https://github.com/material-appkit/quickstart-create-react-app',
-    title: 'GitHub Repository',
-  },
-];
 
 function ApplicationBar(props) {
   const classes = styles();
 
   const context = useContext(AppContext);
   const { loadProgress } = context;
+
+  let linearProgressProps = null;
+  if (loadProgress === undefined) {
+    linearProgressProps = {
+      variant: 'indeterminate',
+    };
+  } else if (isValue(loadProgress)) {
+    linearProgressProps = {
+      variant: 'determinate',
+      value: loadProgress,
+    }
+  }
 
   return (
     <AppBar
@@ -88,7 +83,23 @@ function ApplicationBar(props) {
     >
       <Toolbar className={classes.toolBar}>
         <ApplicationMenuControl
-          navLinkArrangement={navLinkArrangement}
+          navLinkArrangement={[
+            {
+              Icon: DashboardIcon,
+              path: paths.dashboard,
+              title: 'Dashboard',
+            },
+            {
+              Icon: AccountBalanceIcon,
+              path: paths.forex.index,
+              title: 'Foreign Exchange',
+            },
+            {
+              Icon: GitHubIcon,
+              href: 'https://github.com/material-appkit/quickstart-create-react-app',
+              title: 'GitHub Repository',
+            },
+          ]}
         />
 
         <Typography className={classes.appTitle}>
@@ -104,20 +115,14 @@ function ApplicationBar(props) {
         </IconButton>
       </Toolbar>
 
-      {loadProgress !== null &&
-        <LinearProgress className={classes.progressBar} />
+      {linearProgressProps &&
+        <LinearProgress
+          className={classes.progressBar}
+          {...linearProgressProps}
+        />
       }
     </AppBar>
   );
 }
-
-ApplicationBar.propTypes = {
-  navLinkArrangement: PropTypes.array.isRequired,
-};
-
-
-ApplicationBar.defaultProps = {
-  navLinkArrangement: [],
-};
 
 export default ApplicationBar;
