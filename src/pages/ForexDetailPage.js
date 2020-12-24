@@ -11,17 +11,20 @@ function ForexDetailPage(props) {
   const qsParams = NavManager.qsParams;
   const { base } = qsParams;
 
-  const currency = props.match.params.currency.toUpperCase();
+  const currency = props.match.params.currency;
 
   return (
     <ViewController
       title={`${base} to ${currency}`}
       {...props}
     >
-      <ForexDetailView
-        base={base}
-        currency={currency}
-      />
+      {(base && currency) && (
+        <ForexDetailView
+          base={base}
+          currency={currency}
+          standalone
+        />
+      )}
     </ViewController>
   );
 }

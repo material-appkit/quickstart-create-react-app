@@ -62,17 +62,17 @@ function ForexListView(props) {
 
     return { items };
   };
-  
-  
+
+
   const handleBaseCurrencyButtonClick = () => {
-    console.log('display listview dialog');
+
   };
 
 
   return (
     <SplitView
       bar={(
-        <AppBar position="relative" color="default">
+        <AppBar position="relative" color="default" elevation={1}>
           {base &&
             <Toolbar
               className={classes.toolbar}
@@ -84,7 +84,7 @@ function ForexListView(props) {
                 startIcon={(
                   <img
                     alt=''
-                    className={`flag flag-${base.toLowerCase()}`}
+                    className={`flag flag-${base}`}
                   />
                 )}
               >
@@ -94,7 +94,7 @@ function ForexListView(props) {
           }
         </AppBar>
       )}
-      barSize={56}
+      barSize={48}
       placement="top"
       scrollContent
     >

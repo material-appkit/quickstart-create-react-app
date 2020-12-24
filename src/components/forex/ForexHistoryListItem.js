@@ -16,9 +16,8 @@ function ForexHistoryListItem(props) {
 
   return (
     <ListViewItem {...listItemProps(props)}>
-      <ListItemIcon>
+      <ListItemIcon style={{ marginRight: 16 }}>
         <CalendarIcon date={date} />
-
       </ListItemIcon>
 
       <ListItemText

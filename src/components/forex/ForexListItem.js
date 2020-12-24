@@ -17,7 +17,7 @@ function ForexListItem(props) {
       <ListItemIcon>
         <img
           alt=''
-          className={`flag flag-${currency.toLowerCase()}`}
+          className={`flag flag-${currency}`}
         />
       </ListItemIcon>
       <ListItemText
