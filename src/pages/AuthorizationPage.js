@@ -28,6 +28,7 @@ const styles = makeStyles((theme) => ({
 
   heading: {
     borderBottom: `1px solid ${theme.palette.grey[200]}`,
+    fontSize: theme.typography.pxToRem(20),
     paddingBottom: theme.spacing(2),
     textAlign: 'center',
   },
@@ -52,7 +53,7 @@ function AuthorizationPage(props) {
           <LinearProgress style={{ visibility: loading ? 'visible' : 'hidden' }} />
 
           <div className={classes.formContainer}>
-            <Typography variant="h2" className={classes.heading}>
+            <Typography component="h1" className={classes.heading}>
               {title}
             </Typography>
 
