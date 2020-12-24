@@ -19,7 +19,7 @@ const routes = [
   {
     exact: false,
     path: paths.auth.index,
-    component: lazy(() => import('pages/auth/AuthorizationPage')),
+    component: lazy(() => import('pages/AuthorizationPage')),
   },
 ];
 

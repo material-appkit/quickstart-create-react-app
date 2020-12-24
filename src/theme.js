@@ -44,6 +44,7 @@ const theme = createMuiTheme({
 
   //----------------------------------------------------------------------------
   // Material-UI Theme
+  //----------------------------------------------------------------------------
   palette: {
     background: {
       default: '#fff',
@@ -89,16 +90,10 @@ const theme = createMuiTheme({
     },
   },
 
+
   //----------------------------------------------------------------------------
-  // Application Theme
-  topbar: {
-    height: TOP_BAR_HEIGHT,
-  },
-
-  sidebar: {
-    width: SIDEBAR_WIDTH,
-  },
-
+  // Material-AppKit Theme
+  //----------------------------------------------------------------------------
   sizes: {
     navigationController: {
       navbarHeight: NAVBAR_HEIGHT,
@@ -106,7 +101,6 @@ const theme = createMuiTheme({
     },
   },
 
-  // PROPERTY LIST
   propertyList: {
     root: {
       padding: 0,
@@ -157,6 +151,31 @@ const theme = createMuiTheme({
         padding: 0,
         width: 'initial',
       },
+    },
+  },
+
+  //----------------------------------------------------------------------------
+  // Application Theme
+  topbar: {
+    height: TOP_BAR_HEIGHT,
+  },
+
+  sidebar: {
+    width: SIDEBAR_WIDTH,
+  },
+
+  mixins: {
+    actionButton: {
+      fontSize: baseTheme.typography.pxToRem(16),
+      margin: baseTheme.spacing(2, 0),
+      width: '100%',
+    },
+
+    linkButton: {
+      color: baseTheme.palette.text.primary,
+      fontSize: baseTheme.typography.pxToRem(14),
+      fontWeight: 600,
+      textDecoration: 'underline',
     },
   },
 });
