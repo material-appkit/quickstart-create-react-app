@@ -66,7 +66,9 @@ function ForexListView({ listViewProps }) {
 
   const handleCurrencyDialogDismiss = (selection) => {
     if (selection) {
-      NavManager.updateUrlParam('base', selection[0].currency);
+      const currency = selection[0].currency;
+      NavManager.updateUrlParam('base', currency);
+      StorageManager.setLocalValue('baseCurrency', currency);
     }
 
     setCurrencyDialogOpen(false);
