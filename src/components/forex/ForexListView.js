@@ -29,7 +29,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-function ForexListView(props) {
+function ForexListView({ listViewProps }) {
   const classes = styles();
 
   const qsParams = NavManager.qsParams;
@@ -105,6 +105,7 @@ function ForexListView(props) {
       >
         {base &&
           <ListView
+            {...listViewProps}
             classes={{
               listViewLoading: classes.listViewLoading,
             }}
@@ -113,9 +114,6 @@ function ForexListView(props) {
             listItemComponent={ForexListItem}
             listItemProps={{
               displayRate: true,
-              onItemClick: (item) => {
-                props.onNavigate(item);
-              },
             }}
             responseTransformer={transformFetchItemsResponse}
             src={`${FOREX_API_ENDPOINT}/latest`}
@@ -141,9 +139,12 @@ function ForexListView(props) {
 }
 
 ForexListView.propTypes = {
-  location: PropTypes.object.isRequired,
-  onNavigate: PropTypes.func.isRequired,
+  listViewProps: PropTypes.object,
+};
+
+ForexListView.defaultProps = {
+  listViewProps: {},
 };
 
 
-export default ForexListView;
+export default React.memo(ForexListView);
