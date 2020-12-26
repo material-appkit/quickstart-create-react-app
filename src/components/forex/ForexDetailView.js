@@ -20,7 +20,8 @@ import { FOREX_API_ENDPOINT } from 'variables';
 import 'media/flag_sprites.css';
 
 function ForexDetailView(props) {
-  const { base, currency, standalone } = props;
+  const { representedObject, standalone } = props;
+  const { base, currency } = representedObject;
 
   const [dataSource, setDataSource] = useState(null);
 
@@ -107,9 +108,8 @@ function ForexDetailView(props) {
 }
 
 ForexDetailView.propTypes = {
-  base: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired,
+  representedObject: PropTypes.object.isRequired,
   standalone: PropTypes.bool,
 };
 
-export default ForexDetailView;
+export default React.memo(ForexDetailView);
