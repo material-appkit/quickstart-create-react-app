@@ -93,8 +93,14 @@ function registerValidSW(swUrl, config) {
         };
       };
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error during service worker registration:', error);
+      navigator.serviceWorker.ready.then(async(registration) => {
+        await registration.unregister();
+        // Once the service worker is unregistered, we can reload
+        // the page to let the browser download a fresh copy of our app
+        window.location.reload();
+      });
     });
 }
 
