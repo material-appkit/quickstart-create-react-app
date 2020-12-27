@@ -113,11 +113,9 @@ const theme = createMuiTheme({
   //----------------------------------------------------------------------------
   // Material-AppKit Theme
   //----------------------------------------------------------------------------
-  sizes: {
-    navigationController: {
-      navbarHeight: NAVBAR_HEIGHT,
-      toolbarHeight: TOOLBAR_HEIGHT,
-    },
+  navigationController: {
+    navbarHeight: NAVBAR_HEIGHT,
+    toolbarHeight: TOOLBAR_HEIGHT,
   },
 
   propertyList: {
