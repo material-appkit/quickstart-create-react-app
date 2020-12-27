@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import React, { useEffect, useState } from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -29,7 +27,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-function ForexListView({ listViewProps }) {
+function ForexListView(props) {
   const classes = styles();
 
   const qsParams = NavManager.qsParams;
@@ -107,7 +105,7 @@ function ForexListView({ listViewProps }) {
       >
         {base &&
           <ListView
-            {...listViewProps}
+            {...props}
             classes={{
               listViewLoading: classes.listViewLoading,
             }}
@@ -139,14 +137,5 @@ function ForexListView({ listViewProps }) {
     </>
   );
 }
-
-ForexListView.propTypes = {
-  listViewProps: PropTypes.object,
-};
-
-ForexListView.defaultProps = {
-  listViewProps: {},
-};
-
 
 export default React.memo(ForexListView);

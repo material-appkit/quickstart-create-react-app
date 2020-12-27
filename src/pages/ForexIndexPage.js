@@ -71,10 +71,6 @@ function ForexIndexPage(props) {
       <MasterDetailView
         DetailViewComponent={ForexDetailView}
         detailViewPlaceholder={<ForexDetailViewPlaceholder />}
-        detailViewProps={{
-          base,
-          currency: qsParams.currency,
-        }}
         listViewSelectionInitializer={listViewSelectionInitializer}
         listViewContainerClassName={classes.listViewContainer}
         ListViewComponent={ForexListView}
