@@ -16,8 +16,8 @@ const styles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: 100,
-    height: 100,
+    width: 90,
+    height: 90,
     backgroundColor: '#fff',
     borderRadius: '0.6em',
     boxShadow: '0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd',
@@ -36,10 +36,10 @@ const styles = makeStyles((theme) => ({
 
   span: {
     color: '#2f2f2f',
-    fontSize: theme.typography.pxToRem(28),
+    fontSize: theme.typography.pxToRem(24),
     fontWeight: 500,
     letterSpacing: '-0.05em',
-    lineHeight: 1,
+    lineHeight: 0.9,
     margin: '12px 0 2px',
   },
 
