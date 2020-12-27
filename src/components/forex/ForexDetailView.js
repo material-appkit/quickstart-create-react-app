@@ -102,6 +102,7 @@ function ForexDetailView(props) {
         loadingVariant="linear"
         listItemComponent={ForexHistoryListItem}
         windowed
+        windowedListItemHeight={110}
       />
     </SplitView>
   );
