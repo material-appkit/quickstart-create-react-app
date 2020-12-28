@@ -1,58 +1,56 @@
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
 
 import ViewController from '@material-appkit/core/components/ViewController';
 
 import { COMMON_PAGE_PROPS } from 'variables';
 
-import ApplicationLogo from 'media/application-logo.svg';
-import CreateReactAppLogo from 'media/cra-logo.svg';
+import AppKitLogo from 'media/application-logo.png';
 
 const styles = makeStyles((theme) => ({
   main: {
-    padding: theme.spacing(6, 2, 2),
+    padding: theme.spacing(2),
   },
 
   header: {
-    textAlign: 'center',
+    display: 'flex',
+
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+    },
+  },
+
+  headerContent: {
+    flex: 3,
+    padding: theme.spacing(2),
   },
 
   title: {
     fontSize: theme.typography.pxToRem(28),
-    letterSpacing: '0.2rem',
-    marginTop: theme.spacing(1),
-  },
+    letterSpacing: '0.3rem',
+    textTransform: 'uppercase',
+    textAlign: 'center',
 
-  applicationLogo: {
-    width: 200,
-  },
-
-  craGridItem: {
-    [theme.breakpoints.up('md')]: {
-      paddingTop: 10,
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'left',
     },
   },
 
-  craLogo: {
-    margin: -25,
-    width: 250,
+  appkitButton: {
+    borderRadius: 10,
+    flex: 2,
   },
 
-  centerGridItem: {
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: theme.spacing(2, 0),
-  },
-
-  plusIcon: {
-    fontSize: theme.typography.pxToRem(60),
+  appkitLogo: {
+    width: '100%',
+    height: '100%',
+    // maxWidth: 400,
+    // maxHeight: 400,
   },
 }));
 
@@ -63,38 +61,22 @@ function DashboardPage(props) {
     <ViewController title="Dashboard" {...props}>
       <Container maxWidth="md" component="main" className={classes.main}>
         <header className={classes.header}>
-          <Grid container>
-            <Grid item xs={12} md={5}>
-              <Button href="https://material-appkit.com">
-                <img
-                  alt="Application Logo"
-                  className={classes.applicationLogo}
-                  src={ApplicationLogo}
-                />
-              </Button>
+          <IconButton
+            className={classes.appkitButton}
+            href="https://material-appkit.com"
+          >
+            <img
+              alt="Application Logo"
+              className={classes.appkitLogo}
+              src={AppKitLogo}
+            />
+          </IconButton>
 
-              <Typography variant="h1" className={classes.title}>
-                Material-AppKit
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12} md={2} className={classes.centerGridItem}>
-              <AddIcon className={classes.plusIcon} />
-            </Grid>
-
-            <Grid item xs={12} md={5} className={classes.craGridItem}>
-              <Button href="https://create-react-app.dev/">
-                <img
-                  alt="Create-React-App Logo"
-                  className={classes.craLogo}
-                  src={CreateReactAppLogo}
-                />
-              </Button>
-              <Typography variant="h1" className={classes.title}>
-                Create React App
-              </Typography>
-            </Grid>
-          </Grid>
+          <div className={classes.headerContent}>
+            <Typography variant="h1" className={classes.title}>
+              CRA QuickStart
+            </Typography>
+          </div>
         </header>
       </Container>
     </ViewController>
