@@ -10,7 +10,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ApplicationLogo from 'media/application-logo.svg';
+import ApplicationLogo from 'media/appkit-logo.svg';
 
 const styles = makeStyles((theme) => ({
   drawerMenuButton: {
