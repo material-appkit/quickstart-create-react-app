@@ -1,4 +1,3 @@
-import intl from 'react-intl-universal';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
 
@@ -8,42 +7,43 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import withWidth from '@material-ui/core/withWidth';
 
+import { SnackbarProvider } from 'notistack';
+
+import AlertManager from '@material-appkit/core/managers/AlertManager';
 import NavManager from '@material-appkit/core/managers/NavManager';
+import SnackbarManager from '@material-appkit/core/managers/SnackbarManager';
 import { filterByKeys } from '@material-appkit/core/util/object';
 
 import AuthManager from 'managers/AuthManager';
 
-import PlaceholderLayout from 'layout/PlaceholderLayout';
-
 import AppContext from 'AppContext';
 import paths from 'paths';
-import { activeLocale } from 'util/shortcuts';
 
-import {
-  DEFAULT_LOCALE,
-  LOCALE_CHOICES,
-  LOCALE_INFO_MAP,
-} from 'variables';
+import { activeLocale } from 'util/shortcuts';
 
 class App extends React.PureComponent {
   constructor(props) {
     super();
 
+    this.placeholderLayout = <div />;
+
     this.layoutRoutes = [
       {
         pathname: paths.auth.index,
-        Component: React.lazy(() => import('./layout/AuthorizationLayout')),
-        placeholder: <PlaceholderLayout />,
+        LayoutComponent: React.lazy(() => import('./layout/AuthorizationLayout')),
+        placeholder: this.placeholderLayout,
       },
       {
         pathname: paths.index,
-        Component: React.lazy(() => import('./layout/MainLayout')),
-        placeholder: <PlaceholderLayout />,
+        LayoutComponent: React.lazy(() => import('./layout/MainLayout')),
+        placeholder: this.placeholderLayout,
       },
     ];
 
     this.state = {
       initialized: false,
+      ready: false,
+
       layoutConfig: null,
 
       appContext: {
@@ -54,25 +54,6 @@ class App extends React.PureComponent {
         update: this.updateAppContext,
       },
     };
-  }
-
-
-  componentDidMount() {
-    const intl_locales = {};
-    LOCALE_CHOICES.forEach((locale) => {
-      intl_locales[locale] = LOCALE_INFO_MAP[locale].source;
-    });
-
-    let currentLocale = this.state.appContext.locale;
-    if (!LOCALE_CHOICES[currentLocale]) {
-      currentLocale = DEFAULT_LOCALE;
-    }
-
-    intl.init({
-      currentLocale,
-      locales: intl_locales,
-      fallbackLocale: DEFAULT_LOCALE,
-    });
   }
 
 
@@ -90,10 +71,18 @@ class App extends React.PureComponent {
 
   layoutDidMount = (layoutConfig) => {
     this.setState({ layoutConfig });
+
+    if (this.props.onLayoutDidMount) {
+      this.props.onLayoutDidMount(layoutConfig);
+    }
   };
 
 
   layoutWillUnmount = () => {
+    if (this.props.onLayoutWillUnmount) {
+      this.props.onLayoutWillUnmount(this.state.layoutConfig);
+    }
+
     this.setState({ layoutConfig: null });
   };
 
@@ -111,7 +100,11 @@ class App extends React.PureComponent {
     }
     pageTitleComponents.push(process.env.REACT_APP_TITLE);
 
-    return pageTitleComponents.join(' | ');
+    return (
+      <title>
+        {pageTitleComponents.join(' | ')}
+      </title>
+    );
   }
 
   render() {
@@ -129,35 +122,56 @@ class App extends React.PureComponent {
           <HelmetProvider>
             <Helmet>
               <link rel="canonical" href="https://material-appkit.com/" />
-              <title>{this.pageTitle}</title>
+              {this.pageTitle}
             </Helmet>
+          </HelmetProvider>
 
-            <Switch>
-              {this.layoutRoutes.map((routeInfo) => (
+
+          <Switch>
+            {this.layoutRoutes.map((routeInfo) => {
+              const {
+                LayoutComponent,
+                pathname,
+                placeholder,
+                ...layoutProps
+              } = routeInfo;
+
+              return (
                 <Route
-                  key={routeInfo.pathname}
-                  path={routeInfo.pathname}
+                  key={pathname}
+                  path={pathname}
                   render={(routeProps) => (
-                    <Suspense fallback={routeInfo.placeholder}>
-                      <routeInfo.Component
+                    <Suspense fallback={placeholder}>
+                      <LayoutComponent
                         onMount={this.layoutDidMount}
                         onUnmount={this.layoutWillUnmount}
-                        {...this.props}
+                        {...layoutProps}
                         {...routeProps}
                       />
                     </Suspense>
                   )}
                 />
-              ))}
-            </Switch>
-          </HelmetProvider>
+              );
+            })}
+          </Switch>
         </Router>
+
+        <SnackbarProvider
+          anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+          autoHideDuration={3000}
+        >
+          <SnackbarManager />
+        </SnackbarProvider>
+
+        <AlertManager />
       </AppContext.Provider>
     );
   }
 }
 
 App.propTypes = {
+  onLayoutDidMount: PropTypes.func,
+  onLayoutWillUnmount: PropTypes.func,
   width: PropTypes.string.isRequired,
 };
 

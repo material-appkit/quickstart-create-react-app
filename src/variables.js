@@ -7,6 +7,11 @@ export const COMMON_PAGE_PROPS = {
   match: PropTypes.object,
 };
 
+export const GSAP_SCRIPTS = {
+  core: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js',
+  ScrollTo: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollToPlugin.min.js',
+};
+
 export const DEFAULT_LOCALE = 'en-US';
 
 export const FOREX_API_ENDPOINT = 'https://api.exchangeratesapi.io';
